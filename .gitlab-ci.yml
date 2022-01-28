@@ -2,7 +2,6 @@ stages:
   - Build
   - Test
   - Deployment
-  - Trigger
 
 Build-App:
   stage: Build
