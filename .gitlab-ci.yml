@@ -1,0 +1,60 @@
+stages:
+  - Build
+  - Test
+  - Deployment
+  - Trigger
+
+Build-App:
+  stage: Build
+  image: node:16-alpine
+  rules:
+    # Pull Request and Schedule
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    # Only Check in master
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $CI_DEFAULT_BRANCH'
+      when: never
+    - changes: 
+      - src/**/*
+  cache:
+    policy: push
+    paths:
+      - node_modules/
+  script:
+    - npm install
+    - npm run build
+  timeout: 5m
+
+Test-App:
+  stage: Test
+  image: node:16-alpine
+  rules:
+    # Pull Request and Schedule
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    # Only Check in master
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $CI_DEFAULT_BRANCH'
+      when: never
+    - changes: 
+      - src/**/*
+  cache:
+    policy: pull
+    paths:
+      - node_modules/
+  script:
+    - npm run lint
+  timeout: 3m
+
+Image-Push-App:
+  stage: Deployment
+  image: docker:stable
+  services:
+    - docker:dind
+  rules:
+    - if: '$CI_PIPELINE_SOURCE != "schedule"'
+      when: never
+  script:
+    - docker login ${Docker_Registry_Url} -u ${Docker_Registry_UserName} -p ${Docker_Registry_Token}
+    - docker build -t ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name} .
+    - docker push ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}
+  timeout: 10m
