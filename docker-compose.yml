@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  web:
+    # build: .
+    image: registry.gitlab.com/honglinliao/shortener-tw/shortener-app:latest
+    ports:
+      - "80:80"
+    
