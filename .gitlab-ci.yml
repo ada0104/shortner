@@ -74,7 +74,7 @@ Push-Image:
 
 Deploy-App:
   stage: Deploy
-  image: alpine:3.14
+  image: ubuntu:21.10
   rules:
     - if: '$CI_PIPELINE_SOURCE != "schedule"'
       when: never
