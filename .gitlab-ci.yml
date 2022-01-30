@@ -74,17 +74,18 @@ Push-Image:
 
 Deploy-App:
   stage: Deploy
-  image: ubuntu:21.10
+  image: gitlab/dind:latest
   rules:
     - if: '$CI_PIPELINE_SOURCE != "schedule"'
       when: never
     - when: always
   before_script:
-    - apt-get update
-    - echo "y" | apt-get install sshpass
+    - mkdir -p ~/.ssh
+    - echo -e "${Server_SSH}" > ~/.ssh/id_rsa  
+    - chmod 600 ~/.ssh/id_rsa
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-    - sshpass -p ${Server_PWD} ssh -tt ${Server_UserName}@${Server_IP}
-    - docker images && docker ps -a
-    - sshpass -p ${Server_PWD} ssh ${Server_UserName}@${Server_IP} "bash ~/clear-docker.sh ${App_Name} ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
-    - sshpass -p ${Server_PWD} ssh ${Server_UserName}@${Server_IP} "docker run -it -d --name ${App_Name} -p 80:80 ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
+    - ssh ${Server_UserName}@${Server_IP} "docker images && docker ps -a"
+    - ssh ${Server_UserName}@${Server_IP} "bash ~/clear-docker.sh ${App_Name} ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
+    - ssh ${Server_UserName}@${Server_IP} "docker run -it -d --name ${App_Name} -p 80:80 ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
   timeout: 10m
