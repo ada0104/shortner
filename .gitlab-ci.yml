@@ -74,12 +74,13 @@ Push-Image:
 
 Deploy-App:
   stage: Deploy
-  image: gitlab/dind:latest
+  image: ubuntu:21.10
   rules:
     - if: '$CI_PIPELINE_SOURCE != "schedule"'
-      when: never
+      when: nevere
     - when: always
   before_script:
+    - apt-get update
     - apt-get install sshpass
   script:
     - sshpass -p ${Server_PWD} ssh ${Server_UserName}@${Server_IP} "docker images && docker ps -a"
