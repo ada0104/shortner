@@ -81,7 +81,7 @@ Deploy-App:
     - when: always
   before_script:
     - apt-get update
-    - apt-get install sshpass
+    - y | apt-get install sshpass
   script:
     - sshpass -p ${Server_PWD} ssh ${Server_UserName}@${Server_IP} "docker images && docker ps -a"
     - sshpass -p ${Server_PWD} "bash ~/clear-docker.sh ${App_Name} ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
