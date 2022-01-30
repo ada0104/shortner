@@ -83,7 +83,7 @@ Deploy-App:
     - apt-get update
     - echo "y" | apt-get install sshpass
   script:
-    - sshpass -p ${Server_PWD} ssh ${Server_UserName}@${Server_IP}
+    - sshpass -p ${Server_PWD} ssh -tt ${Server_UserName}@${Server_IP}
     - docker images && docker ps -a
     - sshpass -p ${Server_PWD} ssh ${Server_UserName}@${Server_IP} "bash ~/clear-docker.sh ${App_Name} ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
     - sshpass -p ${Server_PWD} ssh ${Server_UserName}@${Server_IP} "docker run -it -d --name ${App_Name} -p 80:80 ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
