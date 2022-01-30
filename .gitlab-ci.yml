@@ -80,10 +80,14 @@ Deploy-App:
       when: never
     - when: always
   before_script:
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+    - eval $(ssh-agent -s)
+    - echo "${Server_SSH}" | tr -d '\r' > deploy.pem
+    - chmod 400 deploy.pem
+    - ssh-add deploy.pem
     - mkdir -p ~/.ssh
-    - echo -e "${Server_SSH}" > ~/.ssh/id_rsa  
-    - chmod 600 ~/.ssh/id_rsa
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - chmod 700 ~/.ssh
+    - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - ssh ${Server_UserName}@${Server_IP} "docker images && docker ps -a"
     - ssh ${Server_UserName}@${Server_IP} "bash ~/clear-docker.sh ${App_Name} ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
