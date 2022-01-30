@@ -80,7 +80,6 @@ Deploy-App:
       when: never
     - when: always
   before_script:
-    - apt-get update
     - apt-get install sshpass
   script:
     - sshpass -p ${Server_PWD} ssh ${Server_UserName}@${Server_IP} "docker images && docker ps -a"
