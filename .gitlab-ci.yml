@@ -65,7 +65,7 @@ Push-Image:
   rules:
     - if: '$CI_PIPELINE_SOURCE != "schedule"'
       when: never
-    - when: never
+    - when: always
   script:
     - docker login ${Docker_Registry_Url} -u ${Docker_Registry_UserName} -p ${Docker_Registry_Token}
     - docker build -t ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name} .
