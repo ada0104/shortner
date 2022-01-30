@@ -77,7 +77,7 @@ Deploy-App:
   image: ubuntu:21.10
   rules:
     - if: '$CI_PIPELINE_SOURCE != "schedule"'
-      when: nevere
+      when: never
     - when: always
   before_script:
     - apt-get update
