@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -20,20 +20,35 @@ module.exports = {
         test: /.jsx$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-          options: { presets: ["@babel/preset-react", "@babel/preset-env"] },
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-react',
+                {
+                  runtime: 'automatic',
+                },
+              ],
+              '@babel/preset-env',
+            ],
+          },
         },
       },
       {
         test: /.tsx$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             presets: [
-              "@babel/typescript",
-              "@babel/preset-react",
-              "@babel/preset-env",
+              '@babel/typescript',
+              [
+                '@babel/preset-react',
+                {
+                  runtime: 'automatic',
+                },
+              ],
+              '@babel/preset-env',
             ],
           },
         },
@@ -42,9 +57,9 @@ module.exports = {
         test: /.ts$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/typescript", "@babel/preset-env"],
+            presets: ['@babel/typescript', '@babel/preset-env'],
           },
         },
       },
@@ -52,9 +67,9 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env"],
+            presets: ['@babel/preset-env'],
           },
         },
       },
@@ -62,12 +77,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: "./index.html",
+      filename: 'index.html',
+      template: './public/index.html',
     }),
   ],
   devServer: {
     port: 3000,
     open: true,
+    historyApiFallback: true,
   },
 };
