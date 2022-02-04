@@ -3,7 +3,11 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "airbnb", "plugin:prettier/recommended"],
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -38,7 +42,8 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "react/destructuring-assignment": "off"
   },
   "settings": {
     "import/resolver": {
