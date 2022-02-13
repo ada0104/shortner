@@ -1,6 +1,7 @@
-import { ReactChild, useMemo, useState } from 'react';
-import { LoaderContext } from '@app/context/util/loader.context';
+import { ReactChild } from 'react';
+import { Provider as ReduxProvider } from 'react-redux';
 import Header from './header.component';
+import { store } from '../../store/store';
 
 interface Props {
   children?: ReactChild;
@@ -11,18 +12,11 @@ const defaultProps: Props = {
 };
 
 const Provider = (props: Props) => {
-  const [loaderState, setLoaderState] = useState(false);
-
-  const loader = useMemo(
-    () => ({ loaderState, setLoaderState }),
-    [loaderState],
-  );
-
   return (
-    <LoaderContext.Provider value={loader}>
+    <ReduxProvider store={store}>
       <Header />
       {props.children}
-    </LoaderContext.Provider>
+    </ReduxProvider>
   );
 };
 

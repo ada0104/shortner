@@ -28,6 +28,10 @@
         "unnamedComponents": "arrow-function"
       }
     ],
+    "no-shadow": "off",
+    "import/prefer-default-export": "off",
+    "no-unused-vars": "off",
+    "no-param-reassign": ["error", { "props": false }],
     "jsx-a11y/anchor-is-valid": "off",
     "react/jsx-filename-extension": [
       2,
