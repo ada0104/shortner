@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Root from './component/util/root.component';
 import Expenses from './container/expenses.container';
 import Invoices from './container/invoices.container';
+import MUI from './component/test/mui.component';
 import { environment } from './core/environment';
 
 const App = () => {
@@ -10,7 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/expenses" element={<Expenses />} />
         <Route path="/invoices" element={<Invoices />} />
-        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/" element={<MUI />} />
         <Route
           path="*"
           element={
