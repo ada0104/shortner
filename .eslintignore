@@ -2,4 +2,5 @@
 /dist
 *.html
 *.json
+*.css
 /node_modules
