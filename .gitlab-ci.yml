@@ -18,8 +18,9 @@ Build-App:
     # Only Check in master
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $CI_DEFAULT_BRANCH'
       when: never
-    - changes: 
-      - src/**/*
+    # - changes:
+    #     - src/**/*
+    - when: always
   cache:
     policy: push
     paths:
@@ -43,8 +44,9 @@ Test-App:
     # Only Check in master
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $CI_DEFAULT_BRANCH'
       when: never
-    - changes: 
-      - src/**/*
+    # - changes:
+    #   - src/**/*
+    - when: always
   cache:
     policy: pull
     paths:
@@ -81,7 +83,7 @@ Deploy-App:
     - when: always
   before_script:
     - mkdir -p ~/.ssh
-    - echo -e "${Server_SSH}" > ~/.ssh/id_rsa  
+    - echo -e "${Server_SSH}" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
