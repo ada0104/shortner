@@ -1,30 +1,18 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { HashRouter } from 'react-router-dom';
+import AppRoute from './app.route';
 import Root from './component/util/root.component';
-
-// Route
-import TestRoute from './feature/test/test.route';
-
-// Component
-import MUI from './component/test/mui.component';
+import { store } from './store/store';
 
 const App = () => {
   return (
-    <HashRouter>
-      <Root>
-        <Routes>
-          <Route path="/test/*" element={<TestRoute />} />
-          <Route path="/" element={<MUI />} />
-          <Route
-            path="*"
-            element={
-              <main style={{ padding: "'1rem'" }}>
-                <p>404 Not Found</p>
-              </main>
-            }
-          />
-        </Routes>
-      </Root>
-    </HashRouter>
+    <Provider store={store}>
+      <HashRouter>
+        <Root>
+          <AppRoute />
+        </Root>
+      </HashRouter>
+    </Provider>
   );
 };
 
