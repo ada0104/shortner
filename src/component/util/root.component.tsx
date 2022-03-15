@@ -1,6 +1,6 @@
 import { ReactChild } from 'react';
-import { Provider } from 'react-redux';
-import { store } from '../../store/store';
+import { CircularProgress } from '@mui/material';
+import { useAppSelector } from '@app/hook/hook';
 
 interface Props {
   children?: ReactChild;
@@ -11,7 +11,14 @@ const defaultProps: Props = {
 };
 
 const Root = (props: Props) => {
-  return <Provider store={store}>{props.children}</Provider>;
+  const showLoader = useAppSelector((state) => state.util.showLoader);
+
+  return (
+    <>
+      {showLoader && <CircularProgress />}
+      {props.children}
+    </>
+  );
 };
 
 Root.defaultProps = defaultProps;
