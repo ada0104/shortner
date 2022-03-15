@@ -1,4 +1,4 @@
-import { Link } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const style = {
@@ -8,7 +8,16 @@ const Header = () => {
   return (
     <div>
       <nav style={style}>
-        <Link className="m-8" underline="hover" href="/test/index">
+        <Link className="m-8" to="/test/index">
+          Test Index
+        </Link>
+        <Link className="m-8" to="/test/a">
+          Test A
+        </Link>
+        <Link className="m-8" to="/test/b">
+          Test B
+        </Link>
+        {/* <Link className="m-8" underline="hover" href="/test/index">
           Test Index
         </Link>
         <Link className="m-8" underline="hover" href="/test/a">
@@ -16,7 +25,7 @@ const Header = () => {
         </Link>
         <Link className="m-8" underline="hover" href="/test/b">
           Test B
-        </Link>
+        </Link> */}
       </nav>
     </div>
   );
