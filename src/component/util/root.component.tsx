@@ -1,6 +1,4 @@
 import { ReactChild } from 'react';
-import { CircularProgress } from '@mui/material';
-import { useAppSelector } from '@app/hook/hook';
 
 interface Props {
   children?: ReactChild;
@@ -11,14 +9,7 @@ const defaultProps: Props = {
 };
 
 const Root = (props: Props) => {
-  const showLoader = useAppSelector((state) => state.util.showLoader);
-
-  return (
-    <>
-      {showLoader && <CircularProgress />}
-      {props.children}
-    </>
-  );
+  return <div>{props.children}</div>;
 };
 
 Root.defaultProps = defaultProps;
