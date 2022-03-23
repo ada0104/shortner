@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from 'react';
 import { Feature } from '@app/enum/feature.enum';
 
-const useFeature = (featureId: Feature) => {
+const useContent = (featureId: Feature) => {
   const [isSuccess, setSuccess] = useState(false);
 
   useLayoutEffect(() => {
@@ -16,4 +16,4 @@ const useFeature = (featureId: Feature) => {
   return isSuccess;
 };
 
-export default useFeature;
+export default useContent;
