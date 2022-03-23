@@ -1,9 +1,13 @@
 import BasePage from '@app/component/util/base-page.component';
+import FeatureContext from '@app/context/feature.context';
+import { useContext } from 'react';
 
 const TestIndex = () => {
+  const featureContext = useContext(FeatureContext);
+
   return (
     <BasePage>
-      <h2>Test Index</h2>
+      <h2>Feature Id: {featureContext.featureId}</h2>
     </BasePage>
   );
 };
