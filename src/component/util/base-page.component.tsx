@@ -1,15 +1,7 @@
-import { ReactChild } from 'react';
+import { FC } from 'react';
 import Header from './header.component';
 
-interface Props {
-  children?: ReactChild;
-}
-
-const defaultProps: Props = {
-  children: undefined,
-};
-
-const BasePage = (props: Props) => {
+const BasePage: FC = (props) => {
   return (
     <>
       <Header />
@@ -17,7 +9,5 @@ const BasePage = (props: Props) => {
     </>
   );
 };
-
-BasePage.defaultProps = defaultProps;
 
 export default BasePage;

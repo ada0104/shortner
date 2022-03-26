@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header: FC = (props) => {
   const style = {
     borderBottom: 'solid 1px',
   };

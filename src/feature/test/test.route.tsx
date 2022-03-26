@@ -1,7 +1,9 @@
 import featureLoader, {
   IFeatureConfig,
 } from '@app/component/util/feature-loader.component';
-import FeatureRoute from '@app/component/util/feature-route';
+import FeatureRoute, {
+  IFeatureRouteConfig,
+} from '@app/component/util/feature-route';
 import { getFeatureConfig } from '@app/enum/feature-map.enum';
 import { FeatureRouteType } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
@@ -11,7 +13,7 @@ import TestIndex from './test-index/test-index.container';
 
 const featureItem = getFeatureConfig(Feature.Test);
 
-const routes = [
+const routes: IFeatureRouteConfig[] = [
   {
     path: featureItem?.featureRoute.index,
     element: TestIndex,
