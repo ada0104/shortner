@@ -18,6 +18,8 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
+    "react/require-default-props": "off",
+    "react/default-props-match-prop-types": "off",
     "no-console": ["error", { "allow": ["debug"] }],
     "prettier/prettier": "error",
     "react/jsx-uses-react": "off",
