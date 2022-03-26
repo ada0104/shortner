@@ -3,25 +3,29 @@ import {
   FeatureRouteType,
 } from '@app/enum/feature-page-type.enum';
 import { FeaturePath } from '@app/enum/feature-path.enum';
-import { ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-interface Props {
-  route: Array<{
-    path: FeaturePageType | FeatureRouteType | FeaturePath | undefined;
-    element: () => ReactElement;
-  }>;
+export interface IFeatureRouteConfig {
+  path: FeaturePageType | FeatureRouteType | FeaturePath | undefined;
+  element: () => ReactElement;
+}
+
+interface IProps {
+  route: IFeatureRouteConfig[];
   endFix?: string;
 }
 
 const defaultProps = {
+  route: [],
   endFix: '',
 };
 
-const FeatureRoute = (props: Props) => {
+const FeatureRoute: FC<IProps> = (props) => {
+  const { route, endFix } = props;
   return (
     <Routes>
-      {props.route
+      {route
         .filter((x) => x.path !== undefined)
         .map((route) => {
           let path = route.path as string;
@@ -30,8 +34,8 @@ const FeatureRoute = (props: Props) => {
               route.path as FeatureRouteType,
             )
           ) {
-            if (props.endFix) {
-              path = `/${route.path}${props.endFix}`;
+            if (endFix) {
+              path = `/${route.path}${endFix}`;
             } else {
               path = `/${route.path}`;
             }

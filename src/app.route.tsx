@@ -2,9 +2,11 @@ import TestRoute from './feature/test/test.route';
 import MUI from './component/test/mui.component';
 import { FeaturePath } from './enum/feature-path.enum';
 import { FeatureRouteType } from './enum/feature-page-type.enum';
-import FeatureRoute from './component/util/feature-route';
+import FeatureRoute, {
+  IFeatureRouteConfig,
+} from './component/util/feature-route';
 
-const routes = [
+const routes: IFeatureRouteConfig[] = [
   {
     path: FeaturePath.Test,
     element: TestRoute,

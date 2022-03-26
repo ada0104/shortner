@@ -1,17 +1,7 @@
-import { ReactChild } from 'react';
+import { FC } from 'react';
 
-interface Props {
-  children?: ReactChild;
-}
-
-const defaultProps: Props = {
-  children: undefined,
-};
-
-const Root = (props: Props) => {
+const Root: FC = (props) => {
   return <div>{props.children}</div>;
 };
-
-Root.defaultProps = defaultProps;
 
 export default Root;
