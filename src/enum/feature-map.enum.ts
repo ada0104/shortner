@@ -17,6 +17,7 @@ const featureMap: IFeatureMapItem[] = [
       index: FeaturePageType.Index,
       a: FeaturePageType.A,
       b: FeaturePageType.B,
+      c: FeaturePageType.C,
     },
   },
 ];

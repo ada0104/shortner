@@ -18,6 +18,9 @@ const Header: FC = (props) => {
         <Link className="m-8" to="/test/b">
           Test B
         </Link>
+        <Link className="m-8" to="/test/c">
+          Test C
+        </Link>
         {/* <Link className="m-8" underline="hover" href="/test/index">
           Test Index
         </Link>
