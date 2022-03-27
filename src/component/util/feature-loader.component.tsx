@@ -3,9 +3,9 @@ import FeatureContext, {
 } from '@app/context/feature.context';
 import { Feature } from '@app/enum/feature.enum';
 import useContent from '@app/hook/useContent';
-import { CircularProgress } from '@mui/material';
 import { ReactElement, useMemo } from 'react';
 import { IFeatureRouteConfig } from './feature-route';
+import Loader from './loader.component';
 
 export interface IFeatureConfig {
   featureId?: Feature;
@@ -27,7 +27,7 @@ const featureLoader =
       );
       return (
         <FeatureContext.Provider value={contextValue}>
-          {isSuccess ? <RouteComponent /> : <CircularProgress />}
+          {isSuccess ? <RouteComponent /> : <Loader />}
         </FeatureContext.Provider>
       );
     };
