@@ -26,7 +26,7 @@ const routes: IFeatureRouteConfig[] = [
 ];
 
 const AppRoute = () => {
-  return <FeatureRoute route={routes} endFix="/*" />;
+  return <FeatureRoute routes={routes} endFix="/*" />;
 };
 
 export default AppRoute;
