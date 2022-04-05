@@ -7,7 +7,6 @@ import {
 } from '@app/enum/feature-page-type.enum';
 import { FeaturePath } from '@app/enum/feature-path.enum';
 import { Route, Routes } from 'react-router-dom';
-import navigationFeature from './feature-navigation.component';
 
 export interface IFeatureRouteConfig {
   path: FeaturePageType | FeatureRouteType | FeaturePath | undefined;
@@ -35,7 +34,7 @@ const FeatureRoute: FC<IProps> = (props) => {
     <Routes>
       {routes
         .filter((x) => x.path !== undefined)
-        .map((route, index) => {
+        .map((route) => {
           let path = route.path as string;
           if (
             !Object.values(FeatureRouteType).includes(
@@ -49,17 +48,8 @@ const FeatureRoute: FC<IProps> = (props) => {
             }
           }
 
-          const ElementComponent = navigationFeature(
-            () => <route.element />,
-            routes[index].path,
-          );
-
           return (
-            <Route
-              path={path}
-              element={<ElementComponent />}
-              key={route.path}
-            />
+            <Route path={path} element={<route.element />} key={route.path} />
           );
         })}
     </Routes>

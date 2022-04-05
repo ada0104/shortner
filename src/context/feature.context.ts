@@ -5,6 +5,7 @@ import { createContext } from 'react';
 export const FeatureContextValue: IFeatureConfig = {
   featureId: Feature.UnManaged,
   featureRoute: [],
+  redirectElementPage: (direction: 'next' | 'prev') => {},
 };
 
 const FeatureContext = createContext(FeatureContextValue);

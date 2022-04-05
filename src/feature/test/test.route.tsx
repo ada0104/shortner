@@ -37,7 +37,7 @@ const routes: IFeatureRouteConfig[] = [
   },
 ];
 
-const featureConfig: IFeatureConfig = {
+const featureConfig: Omit<IFeatureConfig, 'redirectElementPage'> = {
   featureId: featureItem?.featureId,
   featureRoute: routes,
 };
