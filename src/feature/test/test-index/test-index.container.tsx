@@ -7,7 +7,7 @@ const TestIndex = () => {
 
   return (
     <BasePage>
-      <h2>Feature Id: {featureContext.featureId}</h2>
+      <h2>Test Feature Id: {featureContext.featureId}</h2>
     </BasePage>
   );
 };
