@@ -10,7 +10,7 @@ const TestB = () => {
       <button type="button" onClick={() => redirectElementPage('next')}>
         Next
       </button>
-      <button type="button" onClick={() => redirectElementPage('prev')}>
+      <button type="button" onClick={() => redirectElementPage('back')}>
         Prev
       </button>
       <h2>Test B</h2>

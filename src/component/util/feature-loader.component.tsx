@@ -1,6 +1,7 @@
 import FeatureContext, {
   FeatureContextValue,
 } from '@app/context/feature.context';
+import { FeatureRouteType } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
 import useContent from '@app/hook/useContent';
 import { ReactElement, useMemo } from 'react';
@@ -11,20 +12,23 @@ import Loader from './loader.component';
 export interface IFeatureConfig {
   featureId?: Feature;
   featureRoute: IFeatureRouteConfig[];
-  redirectElementPage: (direction: 'next' | 'prev') => void;
 }
 
 const featureLoader =
-  (featureConfig: Omit<IFeatureConfig, 'redirectElementPage'>) =>
-  (RouteComponent: () => ReactElement) => {
+  (featureConfig: IFeatureConfig) => (RouteComponent: () => ReactElement) => {
     const FeatureLoader = () => {
       const location = useLocation();
       const navigate = useNavigate();
+
+      // use feature content check feature is enable
       const isSuccess = useContent(
         featureConfig.featureId ?? Feature.UnManaged,
       );
 
-      const redirectElementPage = (direction: 'next' | 'prev') => {
+      // #region Rotue Navigate
+
+      const redirectElementPage = (direction: 'next' | 'back') => {
+        // get current route index
         const currentRouteIndex = featureConfig.featureRoute.findIndex(
           (item) => {
             const pathItems = location.pathname.split('/');
@@ -36,15 +40,37 @@ const featureLoader =
           },
         );
 
-        const navigatePath =
-          featureConfig.featureRoute[
-            direction === 'next' ? currentRouteIndex + 1 : currentRouteIndex - 1
-          ]?.path;
+        if (currentRouteIndex === -1) return;
 
-        if (currentRouteIndex === -1 || !navigatePath) return;
+        let navigatePath: string | undefined = undefined;
+
+        switch (direction) {
+          case 'next':
+            navigatePath =
+              featureConfig.featureRoute[currentRouteIndex + 1].path;
+            break;
+          case 'back':
+            navigatePath =
+              featureConfig.featureRoute[currentRouteIndex - 1].path;
+            break;
+          default:
+            break;
+        }
+
+        // exclude Feature Route Type
+        if (
+          !navigatePath ||
+          Object.values(FeatureRouteType).includes(
+            navigatePath as FeatureRouteType,
+          )
+        ) {
+          return;
+        }
 
         navigate(navigatePath);
       };
+
+      // #endregion
 
       const contextValue = useMemo(
         () => ({
