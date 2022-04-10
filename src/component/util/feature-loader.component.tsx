@@ -25,7 +25,7 @@ const featureLoader =
         featureConfig.featureId ?? Feature.UnManaged,
       );
 
-      // #region Rotue Navigate
+      // #region Route Navigate
 
       const redirectElementPage = (direction: 'next' | 'back') => {
         // get current route index

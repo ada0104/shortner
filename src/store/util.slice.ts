@@ -1,22 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface UtilState {
-  /** Show Loader */
-  showLoader: boolean;
-}
+export interface UtilState {}
 
-const initialState: UtilState = {
-  showLoader: false,
-};
+const initialState: UtilState = {};
 
 const UtilSlice = createSlice({
   name: 'util',
   initialState,
-  reducers: {
-    changeLoader: (state) => {
-      state.showLoader = !state.showLoader;
-    },
-  },
+  reducers: {},
 });
 
 export const UtilReducer = UtilSlice.reducer;
