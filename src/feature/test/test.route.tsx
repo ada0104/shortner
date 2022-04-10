@@ -43,7 +43,7 @@ const featureConfig: IFeatureConfig = {
 };
 
 const TestRoute = () => {
-  return <FeatureRoute route={routes} />;
+  return <FeatureRoute routes={routes} />;
 };
 
 export default featureLoader(featureConfig)(TestRoute);

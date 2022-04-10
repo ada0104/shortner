@@ -1,31 +1,38 @@
+/* eslint-disable no-console */
+/* eslint-disable react/jsx-props-no-spreading */
+import { FC, ReactElement } from 'react';
 import {
   FeaturePageType,
   FeatureRouteType,
 } from '@app/enum/feature-page-type.enum';
 import { FeaturePath } from '@app/enum/feature-path.enum';
-import { FC, ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 export interface IFeatureRouteConfig {
   path: FeaturePageType | FeatureRouteType | FeaturePath | undefined;
-  element: () => ReactElement;
+  element: ({
+    nextElementPage,
+  }: {
+    nextElementPage?: () => void;
+  }) => ReactElement;
 }
 
 interface IProps {
-  route: IFeatureRouteConfig[];
+  routes: IFeatureRouteConfig[];
   endFix?: string;
 }
 
 const defaultProps = {
-  route: [],
+  routes: [],
   endFix: '',
 };
 
 const FeatureRoute: FC<IProps> = (props) => {
-  const { route, endFix } = props;
+  const { routes, endFix } = props;
+
   return (
     <Routes>
-      {route
+      {routes
         .filter((x) => x.path !== undefined)
         .map((route) => {
           let path = route.path as string;
