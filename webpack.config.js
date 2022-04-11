@@ -37,6 +37,7 @@ module.exports = (env) => {
                 ],
                 '@babel/preset-env',
               ],
+              plugins: ['@babel/plugin-transform-runtime'],
             },
           },
         },
@@ -56,6 +57,7 @@ module.exports = (env) => {
                 ],
                 '@babel/preset-env',
               ],
+              plugins: ['@babel/plugin-transform-runtime'],
             },
           },
         },
@@ -66,6 +68,7 @@ module.exports = (env) => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/typescript', '@babel/preset-env'],
+              plugins: ['@babel/plugin-transform-runtime'],
             },
           },
         },
@@ -76,6 +79,7 @@ module.exports = (env) => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-transform-runtime'],
             },
           },
         },
