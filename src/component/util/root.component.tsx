@@ -1,4 +1,3 @@
-import { useAppSelector } from '@app/hook/hook';
 import { FC } from 'react';
 import ApiLoadingManager from './api-loading-manager.component';
 
