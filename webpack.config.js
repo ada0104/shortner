@@ -2,7 +2,6 @@ const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const webpack = require('webpack');
 
 const OUTPUT = path.join(__dirname, './dist');
 
@@ -37,6 +36,7 @@ module.exports = (env) => {
                 ],
                 '@babel/preset-env',
               ],
+              plugins: ['@babel/plugin-transform-runtime'],
             },
           },
         },
@@ -56,6 +56,7 @@ module.exports = (env) => {
                 ],
                 '@babel/preset-env',
               ],
+              plugins: ['@babel/plugin-transform-runtime'],
             },
           },
         },
@@ -66,6 +67,7 @@ module.exports = (env) => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/typescript', '@babel/preset-env'],
+              plugins: ['@babel/plugin-transform-runtime'],
             },
           },
         },
@@ -76,6 +78,7 @@ module.exports = (env) => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-transform-runtime'],
             },
           },
         },
