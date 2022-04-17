@@ -16,6 +16,9 @@ const MUI = () => {
       </Button>
       <GoogleLoginBtn />
       <div className="text-blue-500">tailwind</div>
+      <i className="ri-home-2-fill text-4xl" />
+      <i className="ri-home-2-fill text-4xl hover:text-blue-800" />
+      <i className="ri-home-2-fill text-4xl active:text-violet-800" />
     </>
   );
 };
