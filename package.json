@@ -24,6 +24,7 @@
     "react-google-login": "^5.2.2",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
+    "remixicon": "^2.5.0",
     "swagger-axios-codegen": "^0.13.2",
     "uuid": "^8.3.2"
   },
