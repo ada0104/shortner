@@ -20,6 +20,13 @@ const featureMap: IFeatureMapItem[] = [
       c: FeaturePageType.C,
     },
   },
+  {
+    featureId: Feature.Home,
+    featurePath: FeaturePath.Home,
+    featureRoute: {
+      index: FeaturePageType.Index,
+    },
+  },
 ];
 
 export const getFeatureConfig = (featureId: Feature) => {

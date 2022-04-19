@@ -1,4 +1,5 @@
 import TestRoute from './feature/test/test.route';
+import HomeRoute from './feature/home/home.route';
 import MUI from './component/test/mui.component';
 import { FeaturePath } from './enum/feature-path.enum';
 import { FeatureRouteType } from './enum/feature-page-type.enum';
@@ -10,6 +11,10 @@ const routes: IFeatureRouteConfig[] = [
   {
     path: FeaturePath.Test,
     element: TestRoute,
+  },
+  {
+    path: FeaturePath.Home,
+    element: HomeRoute,
   },
   {
     path: FeatureRouteType.Match,
