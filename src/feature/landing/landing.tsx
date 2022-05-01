@@ -1,9 +1,11 @@
+import GoogleLoginBtn from '@app/component/auth/google-login.component';
 import FeatureContext from '@app/context/feature.context';
 import { FeaturePageType } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
 import { Button } from '@mui/material';
 import { FC, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FacebookLoginBtn from '../../component/auth/facebook-login-component';
 
 const Landing: FC = () => {
   const navigate = useNavigate();
@@ -24,6 +26,9 @@ const Landing: FC = () => {
       <Button variant="contained" onClick={() => next(Feature.Home)}>
         首頁
       </Button>
+      <hr />
+      <GoogleLoginBtn />
+      <FacebookLoginBtn />
     </>
   );
 };
