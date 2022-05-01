@@ -1,4 +1,5 @@
 export enum FeaturePath {
-  Test = 'test',
+  Landing = '',
   Home = 'home',
+  Error = 'error',
 }

@@ -1,5 +1,6 @@
 export enum Feature {
   UnManaged = 'UnManaged',
-  Test = 'Test',
+  Landing = 'Landing',
   Home = 'Home',
+  Error = 'Error',
 }

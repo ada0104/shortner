@@ -1,32 +1,30 @@
-import TestRoute from './feature/test/test.route';
 import HomeRoute from './feature/home/home.route';
-import MUI from './component/test/mui.component';
 import { FeaturePath } from './enum/feature-path.enum';
 import { FeatureRouteType } from './enum/feature-page-type.enum';
 import FeatureRoute, {
   IFeatureRouteConfig,
-} from './component/util/feature-route';
+} from './component/util/feature-route.component';
+import NotFound from './feature/error/error-notFound/not-found.container';
+import landingRoute from './feature/landing/landing.route';
+import errorRoute from './feature/error/error.route';
+import NavRoute from './component/util/nav-route.component';
 
 const routes: IFeatureRouteConfig[] = [
-  {
-    path: FeaturePath.Test,
-    element: TestRoute,
-  },
   {
     path: FeaturePath.Home,
     element: HomeRoute,
   },
   {
+    path: FeaturePath.Error,
+    element: errorRoute,
+  },
+  {
     path: FeatureRouteType.Match,
-    element: MUI,
+    element: landingRoute,
   },
   {
     path: FeatureRouteType.All,
-    element: () => (
-      <main style={{ padding: "'1rem'" }}>
-        <p>404 Not Found</p>
-      </main>
-    ),
+    element: () => <NavRoute />,
   },
 ];
 
