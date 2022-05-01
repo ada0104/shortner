@@ -21,6 +21,7 @@ const GoogleLoginBtn: FC = () => {
 
   return clientId ? (
     <GoogleLogin
+      autoLoad
       clientId={clientId}
       buttonText="Login"
       onSuccess={success}
