@@ -1,8 +1,6 @@
 export enum FeaturePageType {
   Index = 'index',
-  A = 'a',
-  B = 'b',
-  C = 'c',
+  NotFound = 'notFound',
 }
 
 export enum FeatureRouteType {

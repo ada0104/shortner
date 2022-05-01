@@ -1,29 +1,37 @@
 import FeatureContext, {
   FeatureContextValue,
 } from '@app/context/feature.context';
-import { FeatureRouteType } from '@app/enum/feature-page-type.enum';
+import {
+  getFeatureDefaultPath,
+  getFeatureFullPath,
+} from '@app/enum/feature-map.enum';
+import {
+  FeaturePageType,
+  FeatureRouteType,
+} from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
 import useContent from '@app/hook/useContent';
-import { ReactElement, useMemo } from 'react';
+import { FC, ReactElement, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { IFeatureRouteConfig } from './feature-route';
+import { IFeatureRouteConfig } from './feature-route.component';
 import Loader from './loader.component';
 
 export interface IFeatureConfig {
   featureId?: Feature;
   featureRoute: IFeatureRouteConfig[];
+  notLoadResource?: boolean;
 }
 
 const featureLoader =
   (featureConfig: IFeatureConfig) => (RouteComponent: () => ReactElement) => {
-    const FeatureLoader = () => {
+    const FeatureLoader: FC = () => {
       const location = useLocation();
       const navigate = useNavigate();
 
       // use feature content check feature is enable
-      const isSuccess = useContent(
-        featureConfig.featureId ?? Feature.UnManaged,
-      );
+      const isSuccess = featureConfig.notLoadResource
+        ? true
+        : useContent(featureConfig.featureId ?? Feature.UnManaged);
 
       // #region Route Navigate
 
@@ -70,6 +78,23 @@ const featureLoader =
         navigate(navigatePath);
       };
 
+      const nextFeature = (featureId: Feature) => {
+        const path = getFeatureDefaultPath(featureId);
+        if (path) {
+          navigate(path);
+        }
+      };
+
+      const nextFeatureWithPage = (feature: {
+        featureId: Feature;
+        pageType: FeaturePageType;
+      }) => {
+        const path = getFeatureFullPath(feature.featureId, feature.pageType);
+        if (path) {
+          navigate(path);
+        }
+      };
+
       // #endregion
 
       const contextValue = useMemo(
@@ -77,6 +102,8 @@ const featureLoader =
           ...FeatureContextValue,
           ...featureConfig,
           redirectElementPage,
+          nextFeature,
+          nextFeatureWithPage,
         }),
         [location],
       );

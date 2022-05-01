@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
-/* eslint-disable react/jsx-props-no-spreading */
-import { FC, ReactElement } from 'react';
+import { FC } from 'react';
 import {
   FeaturePageType,
   FeatureRouteType,
@@ -10,11 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 
 export interface IFeatureRouteConfig {
   path: FeaturePageType | FeatureRouteType | FeaturePath | undefined;
-  element: ({
-    nextElementPage,
-  }: {
-    nextElementPage?: () => void;
-  }) => ReactElement;
+  element: FC<any>;
 }
 
 interface IProps {
@@ -22,7 +16,7 @@ interface IProps {
   endFix?: string;
 }
 
-const defaultProps = {
+const defaultProps: IProps = {
   routes: [],
   endFix: '',
 };
