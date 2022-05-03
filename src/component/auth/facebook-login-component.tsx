@@ -17,7 +17,7 @@ const FacebookLoginBtn: FC = () => {
   return appId ? (
     <FacebookLogin
       appId={appId}
-      autoLoad
+      // autoLoad
       fields="name,email,picture"
       callback={responseFacebook}
     />

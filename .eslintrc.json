@@ -18,6 +18,8 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
+    "no-plusplus": "off",
+    "react/no-unstable-nested-components": "off",
     "no-undef-init": "off",
     "react/require-default-props": "off",
     "react/default-props-match-prop-types": "off",
