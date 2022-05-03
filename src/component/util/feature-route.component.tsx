@@ -8,7 +8,8 @@ import { Route, Routes } from 'react-router-dom';
 
 export interface IFeatureRouteConfig {
   path: FeaturePageType | FeatureRouteType | FeaturePath | undefined;
-  element: FC<any>;
+  element: FC;
+  guard?: FC[];
 }
 
 interface IProps {
@@ -42,9 +43,19 @@ const FeatureRoute: FC<IProps> = (props) => {
             }
           }
 
-          return (
-            <Route path={path} element={<route.element />} key={route.path} />
-          );
+          let Element: FC = () => <route.element />;
+          if (route.guard) {
+            for (let i = route.guard.length; i >= 0; i--) {
+              const Guard = route.guard[i];
+              Element = () => (
+                <Guard>
+                  <route.element />
+                </Guard>
+              );
+            }
+          }
+
+          return <Route path={path} element={<Element />} key={route.path} />;
         })}
     </Routes>
   );
