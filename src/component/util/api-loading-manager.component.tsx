@@ -17,7 +17,7 @@ const ax = axios.create({
 const ApiLoadingManager: FC = () => {
   const pendingList = useAppSelector((state) => state.api.apiPending);
   const historyList = useAppSelector((state) => state.api.apiHistory);
-  const dispatcher = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const interceptors = useMemo(() => {
     const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
@@ -26,7 +26,7 @@ const ApiLoadingManager: FC = () => {
       config.headers = { ...config.headers, uniqueId: apiConfig.uniqueId };
 
       // set api pending
-      dispatcher(ApiAction.setApiPending(apiConfig));
+      dispatch(ApiAction.setApiPending(apiConfig));
 
       return config;
     };
@@ -37,7 +37,7 @@ const ApiLoadingManager: FC = () => {
         const { uniqueId } = error.config.headers;
 
         // delete api pending
-        dispatcher(
+        dispatch(
           ApiAction.deleteApiPending({
             uniqueId: uniqueId as string,
             type: ApiType.Failed,
@@ -54,7 +54,7 @@ const ApiLoadingManager: FC = () => {
         const { uniqueId } = response.config.headers;
 
         // delete api pending
-        dispatcher(
+        dispatch(
           ApiAction.deleteApiPending({
             uniqueId: uniqueId as string,
             type: ApiType.Success,
@@ -71,7 +71,7 @@ const ApiLoadingManager: FC = () => {
         const { uniqueId } = error.config.headers;
 
         // delete api pending
-        dispatcher(
+        dispatch(
           ApiAction.deleteApiPending({
             uniqueId: uniqueId as string,
             type: ApiType.Failed,
