@@ -1,11 +1,15 @@
+import useJwt from '@app/hook/useJwt';
 import { FC } from 'react';
 import ApiLoadingManager from './api-loading-manager.component';
 
 const Root: FC = (props) => {
+  // subscribe jwt token for authenticate
+  const isFirstTimeAuthLoading = useJwt();
+
   return (
     <>
       <ApiLoadingManager />
-      <div>{props.children}</div>
+      {isFirstTimeAuthLoading ? <div /> : <div>{props.children}</div>}
     </>
   );
 };

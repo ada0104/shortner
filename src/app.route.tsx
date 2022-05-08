@@ -8,11 +8,13 @@ import FeatureRoute, {
 import LandingRoute from './feature/landing/landing.route';
 import errorRoute from './feature/error/error.route';
 import NavRoute from './component/util/nav-route.component';
+import AuthGuard from './guard/auth.guard';
 
 const routes: IFeatureRouteConfig[] = [
   {
     path: FeaturePath.Home,
     element: HomeRoute,
+    guard: [AuthGuard],
   },
   {
     path: FeaturePath.Error,
