@@ -11,6 +11,12 @@ export interface IApiTypeConfig {
   // api type
   type: ApiType;
 
+  // api status code
+  statusCode: number;
+
+  // api error message
+  errorMsg?: string;
+
   // trigger loader effect
   loaderEffect: boolean;
 }
@@ -36,7 +42,12 @@ const ApiSlice = createSlice({
     },
     deleteApiPending: (
       state,
-      action: PayloadAction<{ uniqueId: string; type: ApiType }>,
+      action: PayloadAction<{
+        uniqueId: string;
+        type: ApiType;
+        errorMsg?: string;
+        statusCode?: number;
+      }>,
     ) => {
       const currentState = { ...state };
 
@@ -44,6 +55,8 @@ const ApiSlice = createSlice({
         ...currentState.apiPending[action.payload.uniqueId],
       };
       targetApi.type = action.payload.type;
+      targetApi.statusCode = action.payload.statusCode ?? 0;
+      targetApi.errorMsg = action.payload.errorMsg;
 
       const newApiHistory = [...currentState.apiHistory];
       newApiHistory.push(targetApi);

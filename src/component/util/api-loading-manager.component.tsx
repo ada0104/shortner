@@ -41,6 +41,7 @@ const ApiLoadingManager: FC = () => {
           ApiAction.deleteApiPending({
             uniqueId: uniqueId as string,
             type: ApiType.Failed,
+            errorMsg: error.message,
           }),
         );
       }
@@ -58,6 +59,7 @@ const ApiLoadingManager: FC = () => {
           ApiAction.deleteApiPending({
             uniqueId: uniqueId as string,
             type: ApiType.Success,
+            statusCode: response.status,
           }),
         );
       }
@@ -75,6 +77,8 @@ const ApiLoadingManager: FC = () => {
           ApiAction.deleteApiPending({
             uniqueId: uniqueId as string,
             type: ApiType.Failed,
+            statusCode: error.response?.status ?? 0,
+            errorMsg: error.message,
           }),
         );
       }

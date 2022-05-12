@@ -14,7 +14,7 @@ const routes: IFeatureRouteConfig[] = [
   {
     path: FeaturePath.Home,
     element: HomeRoute,
-    guard: [AuthGuard],
+    // guard: [AuthGuard],
   },
   {
     path: FeaturePath.Error,

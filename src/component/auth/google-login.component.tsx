@@ -1,8 +1,6 @@
 import { environment } from '@app/core/environment';
-import { StorageType } from '@app/enum/storage-type.enum';
 import { useAppDispatch } from '@app/hook/hook';
 import { signInWithGoogle } from '@app/service/auth/auth.service';
-import { setStorageItem } from '@app/service/util/storage.service';
 import { UserAction } from '@app/store/user.slice';
 import { FC } from 'react';
 import { GoogleLogin } from 'react-google-login';
@@ -17,8 +15,6 @@ const GoogleLoginBtn: FC = () => {
     if (res) {
       const { tokenId } = res;
       const jwtToken = await signInWithGoogle(tokenId);
-      // set to storage
-      setStorageItem(StorageType.JWT_TOKEN, jwtToken);
       // set to reducer
       dispatch(UserAction.setJwtToken(jwtToken));
     }

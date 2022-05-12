@@ -3,12 +3,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface UserState {
   userInfo: UserInfo | null;
+  preSignComplete: boolean;
   jwtToken: string | null;
 }
 
 const initialState: UserState = {
   userInfo: null,
   jwtToken: null,
+  preSignComplete: false,
 };
 
 const UserSlice = createSlice({
@@ -20,6 +22,9 @@ const UserSlice = createSlice({
     },
     setJwtToken: (state, action: PayloadAction<string | null>) => {
       state.jwtToken = action.payload;
+    },
+    setPreSignComplete: (state, action: PayloadAction<boolean>) => {
+      state.preSignComplete = action.payload;
     },
   },
 });
