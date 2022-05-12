@@ -8,3 +8,7 @@ export function getStorageItem<T>(type: StorageType) {
 export const setStorageItem = (type: StorageType, value: unknown) => {
   localStorage.setItem(type, JSON.stringify(value));
 };
+
+export const removeStorageItem = (type: StorageType) => {
+  localStorage.removeItem(type);
+};

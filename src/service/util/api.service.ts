@@ -13,6 +13,7 @@ export const genApiTypeConfig = (
     path,
     loaderEffect,
     type: ApiType.Pending,
+    statusCode: 0,
   };
 
   return result;
