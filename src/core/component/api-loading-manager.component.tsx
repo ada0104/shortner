@@ -1,12 +1,18 @@
 import { serviceOptions } from '@api/index.defs';
 import { environment } from '@app/core/environment';
 import { ApiType } from '@app/enum/api-type.enum';
-import { useAppDispatch, useAppSelector } from '@app/hook/hook';
+import { useAppDispatch, useAppSelector } from '@app/core/hook/hook';
 import { genApiTypeConfig } from '@app/service/util/api.service';
 import { ApiAction } from '@app/store/api.slice';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { FC, useEffect, useMemo } from 'react';
-import Loader from './loader.component';
+import Loader from '../../component/util/loader.component';
+import { UtilAction } from '@app/store/util.slice';
+import { UserAction } from '@app/store/user.slice';
+import { useNavigate } from 'react-router-dom';
+import { getFeatureDefaultPath } from '@app/enum/feature-map.enum';
+import Landing from '@app/feature/landing/landing';
+import { Feature } from '@app/enum/feature.enum';
 
 const ax = axios.create({
   baseURL: environment.api_host,
@@ -18,6 +24,7 @@ const ApiLoadingManager: FC = () => {
   const pendingList = useAppSelector((state) => state.api.apiPending);
   const historyList = useAppSelector((state) => state.api.apiHistory);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const interceptors = useMemo(() => {
     const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
@@ -82,6 +89,15 @@ const ApiLoadingManager: FC = () => {
           }),
         );
       }
+
+      // 401
+      if (error.response?.status === 401) {
+        dispatch(UserAction.setJwtToken(null));
+        // TODO: Adjust to login
+        navigate(getFeatureDefaultPath(Feature.Landing)!);
+      }
+
+      alert(`Response Error: ${error.response?.status}`);
 
       return Promise.reject(error);
     };

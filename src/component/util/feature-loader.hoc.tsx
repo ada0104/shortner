@@ -1,6 +1,6 @@
 import FeatureContext, {
   FeatureContextValue,
-} from '@app/context/feature.context';
+} from '@app/core/context/feature.context';
 import {
   getFeatureDefaultPath,
   getFeatureFullPath,
@@ -10,7 +10,7 @@ import {
   FeatureRouteType,
 } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
-import useContent from '@app/hook/useContent';
+import useContent from '@app/core/hook/useContent';
 import { FC, ReactElement, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { IFeatureRouteConfig } from './feature-route.component';

@@ -18,6 +18,8 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
+    "no-alert": "off",
+    "import/order": "off",
     "no-inner-declarations": "off",
     "no-underscore-dangle": "off",
     "react/jsx-no-useless-fragment": "off",

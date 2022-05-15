@@ -1,37 +1,42 @@
+import { UtilAction } from '@app/store/util.slice';
 import { UserAction } from '@app/store/user.slice';
 import { StorageType } from '@app/enum/storage-type.enum';
-import { useAppDispatch, useAppSelector } from '@app/hook/hook';
+import { useAppDispatch, useAppSelector } from '@app/core/hook/hook';
 import {
   getStorageItem,
   removeStorageItem,
   setStorageItem,
 } from '@app/service/util/storage.service';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const useJwt = () => {
   const dispatch = useAppDispatch();
   const jwtToken = useAppSelector((state) => state.user.jwtToken);
-  const preSignComplete = useAppSelector((state) => state.user.preSignComplete);
+  const startUp = useAppSelector((state) => state.util.startUp);
 
   // when app started trigger
   useEffect(() => {
     const jwtToken = getStorageItem<string>(StorageType.JWT_TOKEN);
     if (jwtToken) {
+      // set to user reducer
       dispatch(UserAction.setJwtToken(jwtToken));
     } else {
-      dispatch(UserAction.setPreSignComplete(true));
+      dispatch(UtilAction.setValidUserComplete(true));
     }
+    // set to util reducer
+    dispatch(UtilAction.setJwtSetting(true));
   }, []);
 
   useEffect(() => {
-    if (preSignComplete) {
+    if (startUp.jwtSetting) {
       if (jwtToken) {
         setStorageItem(StorageType.JWT_TOKEN, jwtToken);
       } else {
         removeStorageItem(StorageType.JWT_TOKEN);
+        dispatch(UserAction.setUserInfo(null));
       }
     }
-  }, [jwtToken, preSignComplete]);
+  }, [jwtToken, startUp]);
 };
 
 export default useJwt;

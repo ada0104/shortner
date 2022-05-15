@@ -1,5 +1,5 @@
 import GoogleLoginBtn from '@app/component/auth/google-login.component';
-import FeatureContext from '@app/context/feature.context';
+import FeatureContext from '@app/core/context/feature.context';
 import { FeaturePageType } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
 import { Button } from '@mui/material';
