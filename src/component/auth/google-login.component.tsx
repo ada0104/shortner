@@ -1,5 +1,5 @@
 import { environment } from '@app/core/environment';
-import { useAppDispatch } from '@app/hook/hook';
+import { useAppDispatch } from '@app/core/hook/hook';
 import { signInWithGoogle } from '@app/service/auth/auth.service';
 import { UserAction } from '@app/store/user.slice';
 import { FC } from 'react';

@@ -1,6 +1,6 @@
 import { getFeatureDefaultPath } from '@app/enum/feature-map.enum';
 import { Feature } from '@app/enum/feature.enum';
-import { useAppSelector } from '@app/hook/hook';
+import { useAppSelector } from '@app/core/hook/hook';
 import { FC, useMemo, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 

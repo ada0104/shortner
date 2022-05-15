@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import AppRoute from './app.route';
-import Root from './component/util/root.component';
+import Root from './core/component/root.component';
 import { store } from './store/store';
 import 'remixicon/fonts/remixicon.css';
 

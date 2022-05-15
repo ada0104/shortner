@@ -1,5 +1,5 @@
 import BasePage from '@app/component/util/base-page.component';
-import FeatureContext from '@app/context/feature.context';
+import FeatureContext from '@app/core/context/feature.context';
 
 import { useContext } from 'react';
 
