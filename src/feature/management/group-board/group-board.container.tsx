@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-
 const GroupBoardIndex = () => {
   return <h2>Group Board</h2>;
 };

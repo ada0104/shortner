@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import FeatureContext from '@app/context/feature.context';
 
 const EachGroupBoard = () => {
   const { id } = useParams();
