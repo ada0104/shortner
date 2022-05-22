@@ -1,9 +1,12 @@
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto:wght@700;900&display=swap');
 
 html,
 body {
-  @apply text-base font-main-noto;
+  @apply text-base font-main-noto m-0 p-0 no-underline text-black;
+}
+
+* {
+  @apply no-underline;
 }

@@ -3,4 +3,9 @@
 *.html
 *.json
 *.css
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
 /node_modules

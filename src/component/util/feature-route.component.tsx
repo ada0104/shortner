@@ -23,7 +23,7 @@ const defaultProps: IProps = {
 };
 
 const FeatureRoute: FC<IProps> = (props) => {
-  const { routes, endFix } = props;
+  const { routes, endFix, children } = props;
 
   return (
     <Routes>

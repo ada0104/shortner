@@ -6,8 +6,9 @@ module.exports = {
       'main-noto': ['Noto Sans TC', 'sans-serif'],
       'secondary-roboto': ['Roboto', 'sans-serif'],
     },
+    important: '#root',
     extend: {
-      color: {
+      colors: {
         'main-blue': {
           100: '#F9FBFF',
           200: '#E7EEFA',
@@ -23,6 +24,9 @@ module.exports = {
         'secondary-red': '#D95140',
         'secondary-blue': '#1877F2',
         'base-back-gray': '#FAFAFA',
+      },
+      boxShadow: {
+        'normal': '4px 2px 10px rgba(0, 0, 0, 0.1)',
       },
     },
   },

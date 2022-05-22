@@ -1,0 +1,103 @@
+import { FC, useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
+
+// images
+import LogoImage from '@app/assets/logo.svg';
+
+// constants
+import { NAVIGATION_DEFAULT_LIST } from '@app/constants/list';
+import { FeaturePath } from '@app/enum/feature-path.enum';
+
+// mui components
+import { ListItemIcon, MenuItem, Typography } from '@mui/material';
+
+const mockSubItems = [
+  {
+    id: '1',
+    label: '行銷部門',
+  },
+  {
+    id: '2',
+    label: '台北辦公室',
+  },
+  {
+    id: '3',
+    label: '電商專案',
+  },
+];
+
+const Navigation: FC = () => {
+  const [navigationList, setNavigationList] = useState(NAVIGATION_DEFAULT_LIST);
+
+  useEffect(() => {
+    // Get group subItems from api
+    const tempCompletedList = [...navigationList];
+    const groupIndex = tempCompletedList.findIndex(
+      (navItem) => navItem.path === FeaturePath.GroupBoard,
+    );
+    tempCompletedList[groupIndex].subItems = mockSubItems;
+
+    setNavigationList(tempCompletedList);
+  }, []);
+
+  return (
+    <div className="w-60 shadow-normal py-9 px-6 bg-white flex flex-col z-10">
+      <div className="flex-1">
+        <div className="w-[170px] mb-8">
+          <img src={LogoImage} alt="logo" className="w-full" />
+        </div>
+
+        {navigationList.map((navItem) => (
+          <div className="w-full " key={navItem.label}>
+            <NavLink to={`${navItem.path}`}>
+              {({ isActive }) => (
+                <MenuItem className="px-[6px] py-4 w-full text-black">
+                  <div
+                    className={
+                      isActive ? 'w-1 h-[28px] bg-main-blue-300 mr-3' : 'hidden'
+                    }
+                  />
+                  <ListItemIcon>
+                    <i
+                      className={classNames(
+                        'text-2xl text-black',
+                        navItem.icon,
+                      )}
+                    />
+                  </ListItemIcon>
+                  <Typography className="text-lg">{navItem.label}</Typography>
+                </MenuItem>
+              )}
+            </NavLink>
+            {/* sun-items */}
+            {navItem.subItems?.map((item) => {
+              return (
+                <NavLink
+                  to={`${FeaturePath.GroupBoard}/${item.id}`}
+                  key={item.id}
+                  className="no-underline text-black hover:text-main-blue-300"
+                >
+                  <Typography className="text-sm pl-5 py-2">
+                    {item.label}
+                  </Typography>
+                </NavLink>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+
+      <NavLink
+        to={`/${FeaturePath.Home}`}
+        className="text-black hover:text-main-blue-300"
+      >
+        <Typography className="text-sm pl-5 py-2 underline">
+          回到首頁
+        </Typography>
+      </NavLink>
+    </div>
+  );
+};
+
+export default Navigation;

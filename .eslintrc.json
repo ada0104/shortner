@@ -32,6 +32,7 @@
     "prettier/prettier": "error",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    "react/no-unknown-property": "off",
     "react/function-component-definition": [
       2,
       {
@@ -46,7 +47,9 @@
     "jsx-a11y/anchor-is-valid": "off",
     "react/jsx-filename-extension": [
       2,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+      {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
     ],
     "import/extensions": [
       "error",
