@@ -6,7 +6,7 @@ module.exports = {
       'main-noto': ['Noto Sans TC', 'sans-serif'],
       'secondary-roboto': ['Roboto', 'sans-serif'],
     },
-    important: '#root',
+    // important: '#root',
     extend: {
       colors: {
         'main-blue': {

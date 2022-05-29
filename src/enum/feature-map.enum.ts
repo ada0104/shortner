@@ -36,6 +36,7 @@ const featureMap: IFeatureMapItem[] = [
   {
     featureId: Feature.Management,
     featurePath: FeaturePath.Management,
+    notLoadResource: true,
   },
   {
     featureId: Feature.Error,
