@@ -1,5 +1,6 @@
 import { Button, Tab, Tabs } from '@mui/material';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState, SyntheticEvent } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 // components
 import UrlTable from '@app/core/component/url-table-component';
@@ -30,10 +31,17 @@ const TabPanel = (props: ITabPanelProps) => {
 
 const UrlBoardIndex = () => {
   const [modeIndex, setModeIndex] = useState(0);
+  const [currentActivePage, setCurrentActivePage] = useState(1);
+  const [currentExpiredPage, setCurrentExpiredPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  // TODO: 等接資料
+  const activeTotalCount = 20;
+  const expiredTotalCount = 5;
 
   // methods
-  const handleChange = (_: any, newIndex: number) => {
-    setModeIndex(newIndex);
+  const handleModeChange = (_: SyntheticEvent, newIndex: number) => {
+    // 下方的useEffect會判斷，然後去修改state的modeIndex
+    setSearchParams({ tabIndex: newIndex.toString() });
   };
 
   const a11yProps = (index: number) => {
@@ -43,6 +51,26 @@ const UrlBoardIndex = () => {
     };
   };
 
+  const handlePageChange = (page: number, type: 'active' | 'expired') => {
+    if (type === 'active') {
+      setCurrentActivePage(page);
+    } else if (type === 'expired') {
+      setCurrentExpiredPage(page);
+    }
+  };
+
+  // effects
+  useEffect(() => {
+    const paramTabIndex = searchParams.get('tabIndex');
+    if (!paramTabIndex) {
+      setSearchParams({ tabIndex: '0' });
+    }
+
+    if (paramTabIndex === '0' || paramTabIndex === '1') {
+      setModeIndex(parseInt(paramTabIndex, 10));
+    }
+  }, [modeIndex]);
+
   return (
     <>
       <h2 className="text-4xl mb-[30px]">URL Board</h2>
@@ -50,7 +78,7 @@ const UrlBoardIndex = () => {
       <div className="flex justify-between mb-3">
         <Tabs
           value={modeIndex}
-          onChange={handleChange}
+          onChange={handleModeChange}
           className="min-h-[0px]"
           TabIndicatorProps={{
             className: 'h-1',
@@ -83,10 +111,21 @@ const UrlBoardIndex = () => {
       </div>
 
       <TabPanel value={modeIndex} index={0}>
-        <UrlTable rows={urlRows} />
+        <UrlTable
+          rows={urlRows}
+          currentPage={currentActivePage}
+          pageCount={activeTotalCount}
+          pageChange={(_, page: number) => handlePageChange(page, 'active')}
+        />
       </TabPanel>
       <TabPanel value={modeIndex} index={1}>
-        <UrlTable rows={urlRows} isExpired />
+        <UrlTable
+          rows={urlRows}
+          currentPage={currentExpiredPage}
+          pageCount={expiredTotalCount}
+          pageChange={(_, page: number) => handlePageChange(page, 'expired')}
+          isExpired
+        />
       </TabPanel>
     </>
   );

@@ -5,14 +5,16 @@ import {
   TableRow,
   TableBody,
   Stack,
+  Typography,
 } from '@mui/material';
-import { FC } from 'react';
+import { FC, useState, useRef, useEffect } from 'react';
 import { format } from 'date-fns';
 import classNames from 'classnames';
 
 // images
 import QRImage from '@app/assets/qr.svg';
 import MoreImage from '@app/assets/more.svg';
+import TriangleImage from '@app/assets/triangle.svg';
 
 // components
 import {
@@ -37,15 +39,45 @@ interface IUrlRow {
 interface IProps {
   rows?: Array<IUrlRow>;
   isExpired?: boolean;
+  pageCount: number;
+  currentPage: number;
+  pageChange: (event: object, page: number) => void;
 }
 
 const UrlTable: FC<IProps> = (props) => {
-  const { rows, isExpired } = props;
+  const { rows, isExpired, pageCount, currentPage, pageChange } = props;
+  const [copyMessageIndex, setCopyMessageIndex] = useState<number | null>(null);
+  const copyTimer = useRef<number | null>(null);
+
+  // methods
+  const copyPath = (path: string, id: number) => {
+    if (isExpired) return;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(path).then(() => {
+        setCopyMessageIndex(id);
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (copyMessageIndex !== null) {
+      copyTimer.current = window.setTimeout(
+        () => setCopyMessageIndex(null),
+        500,
+      );
+    }
+
+    return () => {
+      if (copyTimer.current) {
+        clearTimeout(copyTimer.current);
+      }
+    };
+  }, [copyMessageIndex]);
 
   return (
     <>
       <TableContainer component={Paper}>
-        <Table className="min-w-[1000px] table-fixed">
+        <Table className="min-w-[1000px] table-fixed break-words">
           <StyledTableHead>
             <TableRow>
               <StyledTableCell>名稱</StyledTableCell>
@@ -58,7 +90,7 @@ const UrlTable: FC<IProps> = (props) => {
               {!isExpired && <StyledTableCell>QR</StyledTableCell>}
 
               {/* 中間空一個空間 */}
-              <StyledTableCell />
+              {/* <StyledTableCell /> */}
 
               {!isExpired && <StyledTableCell>最新編輯</StyledTableCell>}
 
@@ -68,7 +100,7 @@ const UrlTable: FC<IProps> = (props) => {
           </StyledTableHead>
 
           <TableBody>
-            {rows?.map((row) => {
+            {rows?.map((row, index) => {
               const deadline = format(
                 new Date(row.deadline),
                 'yyyy.MM.dd HH:mm',
@@ -88,14 +120,45 @@ const UrlTable: FC<IProps> = (props) => {
                   </StyledTableCell>
                   <StyledTableCell className="w-[200px] max-w-[200px]">
                     <div
-                      className={classNames('cursor-pointer truncate', {
+                      onClick={() => copyPath(row.path, index)}
+                      onKeyDown={() => {}}
+                      role="button"
+                      tabIndex={0}
+                      className={classNames('cursor-pointer relative group', {
                         'text-secondary-gary-400 cursor-not-allowed': isExpired,
                       })}
                     >
-                      {row.path}
+                      <div className="flex items-center group min-h-[32px]">
+                        <i
+                          className={classNames(
+                            'ri-clipboard-fill text-main-blue-300 text-2xl mr-1 hidden',
+                            { 'group-hover:block': !isExpired },
+                          )}
+                        />
+                        <Typography variant="body1" className="truncate">
+                          {row.path}
+                        </Typography>
+                      </div>
+
+                      {copyMessageIndex === index && (
+                        <div className="absolute -top-[100%] left-1/2 -translate-x-1/2">
+                          <Typography
+                            variant="body1"
+                            className="text-[14px] text-white font-semibold bg-black px-2 py-1 rounded-2xl"
+                          >
+                            COPY !
+                          </Typography>
+
+                          <img
+                            src={TriangleImage}
+                            alt="triangle"
+                            className="w-3 h-3 absolute -mt-1 left-1/2 -translate-x-1/2"
+                          />
+                        </div>
+                      )}
                     </div>
                   </StyledTableCell>
-                  <StyledTableCell className="w-[120px] max-w-[120px]">
+                  <StyledTableCell>
                     <div
                       className={classNames({
                         'text-secondary-gary-400': isExpired,
@@ -107,20 +170,20 @@ const UrlTable: FC<IProps> = (props) => {
 
                   {!isExpired && (
                     <StyledTableCell>
-                      <a href={row.QRPath}>
+                      <a href={row.QRPath} download>
                         <img src={QRImage} alt="QR" className="w-6 h-6" />
                       </a>
                     </StyledTableCell>
                   )}
 
                   {/* 中間空一個空間 */}
-                  <StyledTableCell />
+                  {/* <StyledTableCell /> */}
 
                   {!isExpired && <StyledTableCell>{editAt}</StyledTableCell>}
 
                   <StyledTableCell>{row.group}</StyledTableCell>
                   <StyledTableCell>
-                    <div className="flex items-center">
+                    <div className="flex items-center flex-wrap ">
                       <div className="w-7 h-7 min-w-[28px] rounded-full overflow-hidden mr-[10px]">
                         <img
                           src={row.avatar}
@@ -128,12 +191,21 @@ const UrlTable: FC<IProps> = (props) => {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      {row.editor}
+                      <Typography
+                        variant="body1"
+                        className="break-words min-w-0"
+                      >
+                        {row.editor}
+                      </Typography>
                     </div>
                   </StyledTableCell>
 
                   <StyledTableCell>
-                    <img src={MoreImage} alt="more" className="w-7 h-7" />
+                    <img
+                      src={MoreImage}
+                      alt="more"
+                      className="w-7 h-7 cursor-pointer"
+                    />
                   </StyledTableCell>
                 </StyledTableRow>
               );
@@ -142,8 +214,12 @@ const UrlTable: FC<IProps> = (props) => {
         </Table>
       </TableContainer>
 
-      <Stack spacing={2} className="items-center">
-        <StyledPagination count={20} />
+      <Stack spacing={2} className="items-center mt-5">
+        <StyledPagination
+          count={pageCount}
+          page={currentPage}
+          pageChange={pageChange}
+        />
       </Stack>
     </>
   );

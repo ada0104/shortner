@@ -1,12 +1,11 @@
 module.exports = {
   content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
-  important: '#root',
+  // important: '#root',
   theme: {
     fontFamily: {
       'main-noto': ['Noto Sans TC', 'sans-serif'],
       'secondary-roboto': ['Roboto', 'sans-serif'],
     },
-    // important: '#root',
     extend: {
       colors: {
         'main-blue': {
@@ -31,4 +30,7 @@ module.exports = {
     },
   },
   plugins: [],
+  corePlugins: {
+    preflight: false,
+  },
 };
