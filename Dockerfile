@@ -7,7 +7,7 @@ WORKDIR /app
 # copy file and exclude .dockerIgnore list file
 COPY . /app
 # npm install
-RUN npm install
+RUN npm install --force
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 # build prod code
