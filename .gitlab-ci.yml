@@ -26,7 +26,7 @@ Build-App:
     paths:
       - node_modules/
   script:
-    - npm install
+    - npm install --force
     - npm run build
   timeout: 5m
 
