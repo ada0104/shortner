@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
 // images
@@ -29,6 +29,7 @@ const mockSubItems = [
 
 const Navigation: FC = () => {
   const [navigationList, setNavigationList] = useState(NAVIGATION_DEFAULT_LIST);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     // Get group subItems from api
@@ -42,7 +43,7 @@ const Navigation: FC = () => {
   }, []);
 
   return (
-    <div className="w-60 shadow-normal py-9 px-6 bg-white flex flex-col z-10">
+    <div className="w-60 min-w-[240px] shadow-normal py-9 px-6 bg-white flex flex-col z-10">
       <div className="flex-1">
         <div className="w-[170px] mb-8">
           <img src={LogoImage} alt="logo" className="w-full" />
@@ -51,36 +52,57 @@ const Navigation: FC = () => {
         {navigationList.map((navItem) => (
           <div className="w-full " key={navItem.label}>
             <NavLink to={`${navItem.path}`}>
-              {({ isActive }) => (
-                <MenuItem className="px-[6px] py-4 w-full text-black">
-                  <div
-                    className={
-                      isActive ? 'w-1 h-[28px] bg-main-blue-300 mr-3' : 'hidden'
-                    }
-                  />
-                  <ListItemIcon>
-                    <i
-                      className={classNames(
-                        'text-2xl text-black',
-                        navItem.icon,
-                      )}
+              {({ isActive }) => {
+                return (
+                  <MenuItem
+                    className={classNames('px-[6px] py-4 w-full text-black', {
+                      'opacity-75': !isActive,
+                    })}
+                  >
+                    <div
+                      className={
+                        isActive
+                          ? 'w-1 h-[28px] bg-main-blue-300 mr-3'
+                          : 'hidden'
+                      }
                     />
-                  </ListItemIcon>
-                  <Typography className="text-lg">{navItem.label}</Typography>
-                </MenuItem>
-              )}
+                    <ListItemIcon>
+                      <i
+                        className={classNames(
+                          'text-2xl text-black',
+                          navItem.icon,
+                        )}
+                      />
+                    </ListItemIcon>
+                    <Typography className="text-lg">{navItem.label}</Typography>
+                  </MenuItem>
+                );
+              }}
             </NavLink>
+
             {/* sun-items */}
             {navItem.subItems?.map((item) => {
+              const parentPath = pathname.split('/')?.[2];
+              const isNavItemIsActive = parentPath === navItem.path;
+
+              if (!isNavItemIsActive) return null;
+
               return (
                 <NavLink
-                  to={`${FeaturePath.GroupBoard}/${item.id}`}
+                  to={`${navItem.path}/${item.id}`}
                   key={item.id}
                   className="no-underline text-black hover:text-main-blue-300"
                 >
-                  <Typography className="text-sm pl-5 py-2">
-                    {item.label}
-                  </Typography>
+                  {() => {
+                    const parentPath = pathname.split('/')?.[2];
+                    const iaParentActive = parentPath === navItem.path;
+
+                    return (
+                      <Typography className="text-sm pl-5 py-2">
+                        {item.label}
+                      </Typography>
+                    );
+                  }}
                 </NavLink>
               );
             })}
