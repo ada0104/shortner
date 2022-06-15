@@ -4,9 +4,15 @@ import { FeaturePath } from './feature-path.enum';
 import { Feature } from './feature.enum';
 
 export interface IFeatureMapItem {
+  // feature id
   featureId: Feature;
+  // feature parent path
+  featureParentPath?: FeaturePath[];
+  // feature path
   featurePath: FeaturePath;
+  // feature route
   featureRoute?: { [key in FeaturePageType]?: FeaturePageType };
+  // feature default page
   featureDefaultRoute?: FeaturePageType;
   notLoadResource?: boolean;
 }
@@ -36,6 +42,11 @@ const featureMap: IFeatureMapItem[] = [
   {
     featureId: Feature.Management,
     featurePath: FeaturePath.Management,
+    featureRoute: {
+      index: FeaturePageType.Index,
+      'url-board': FeaturePageType.UrlBoard,
+      'group-board': FeaturePageType.GroupBoard,
+    },
     notLoadResource: true,
   },
   {

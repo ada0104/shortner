@@ -1,5 +1,7 @@
 import {
-  Tiny,
+  Group,
+  GroupMember,
+  EnumGroupMemberRole,
   IList,
   List,
   IListResult,
@@ -15,23 +17,37 @@ import {
   basePath
 } from './index.defs';
 
-export class TinyService {
+export class GroupService {
   /** Generate by swagger-axios-codegen */
   // @ts-nocheck
   /* eslint-disable */
 
   /**
-   * Create Tiny Url
+   * Get Group List
    */
-  static createTinyUsingPost1(
+  static getGroupsUsingGet(options: IRequestOptions = {}): Promise<Group[]> {
+    return new Promise((resolve, reject) => {
+      let url = basePath + '/group';
+
+      const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
+
+      /** 适配ios13，get请求不允许带body */
+
+      axios(configs, resolve, reject);
+    });
+  }
+  /**
+   * Create Group
+   */
+  static createTinyUsingPost(
     params: {
       /** body */
-      body: Tiny;
+      body: Group;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<Tiny> {
+  ): Promise<Group> {
     return new Promise((resolve, reject) => {
-      let url = basePath + '/tiny';
+      let url = basePath + '/group';
 
       const configs: IRequestConfig = getConfigs('post', 'application/json', url, options);
 
@@ -43,17 +59,17 @@ export class TinyService {
     });
   }
   /**
-   * Update Tiny Url
+   * Update Group
    */
-  static updateTinyUsingPatch1(
+  static updateTinyUsingPatch(
     params: {
       /** body */
-      body: Tiny;
+      body: Group;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<Tiny> {
+  ): Promise<Group> {
     return new Promise((resolve, reject) => {
-      let url = basePath + '/tiny';
+      let url = basePath + '/group';
 
       const configs: IRequestConfig = getConfigs('patch', 'application/json', url, options);
 
@@ -65,17 +81,17 @@ export class TinyService {
     });
   }
   /**
-   * Get Tiny Url
+   * Get Group By Id
    */
-  static getTinyUsingGet(
+  static getGroupByIdUsingGet(
     params: {
       /** id */
       id?: string;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<Tiny> {
+  ): Promise<Group> {
     return new Promise((resolve, reject) => {
-      let url = basePath + '/tiny/{id}';
+      let url = basePath + '/group/{id}';
       url = url.replace('{id}', params['id'] + '');
 
       const configs: IRequestConfig = getConfigs('get', 'application/json', url, options);
@@ -86,17 +102,17 @@ export class TinyService {
     });
   }
   /**
-   * Delete Tiny Url
+   * Delete Group
    */
-  static deleteTinyUsingDelete1(
+  static deleteTinyUsingDelete(
     params: {
       /** id */
       id?: string;
     } = {} as any,
     options: IRequestOptions = {}
-  ): Promise<any> {
+  ): Promise<Group> {
     return new Promise((resolve, reject) => {
-      let url = basePath + '/tiny/{id}';
+      let url = basePath + '/group/{id}';
       url = url.replace('{id}', params['id'] + '');
 
       const configs: IRequestConfig = getConfigs('delete', 'application/json', url, options);

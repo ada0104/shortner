@@ -8,23 +8,16 @@ import FeatureRoute, {
 import LandingRoute from './feature/landing/landing.route';
 import ManagementRoute from './feature/management/management.route';
 import ErrorRoute from './feature/error/error.route';
-import userCenterRoute from './feature/user-center/user-center.route';
+import UserCenterRoute from './feature/user-center/user-center.route';
 import NavRoute from './component/util/nav-route.component';
 import AuthGuard from './core/guard/auth.guard';
 
 const routes: IFeatureRouteConfig[] = [
+  // #region
   {
     path: FeaturePath.Home,
     element: HomeRoute,
     guard: [AuthGuard],
-  },
-  {
-    path: FeaturePath.Error,
-    element: ErrorRoute,
-  },
-  {
-    path: FeatureRouteType.Match,
-    element: LandingRoute,
   },
   {
     path: FeaturePath.Management,
@@ -36,7 +29,16 @@ const routes: IFeatureRouteConfig[] = [
   },
   {
     path: FeaturePath.UserCenter,
-    element: userCenterRoute,
+    element: UserCenterRoute,
+  },
+  {
+    path: FeaturePath.Error,
+    element: ErrorRoute,
+  },
+  // #endregion
+  {
+    path: FeatureRouteType.Match,
+    element: LandingRoute,
   },
   {
     path: FeatureRouteType.All,
