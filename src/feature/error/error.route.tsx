@@ -1,10 +1,10 @@
 import featureLoader, {
   IFeatureConfig,
-} from '@app/component/util/feature-loader.hoc';
+} from '@app/component/route/feature-loader.hoc';
 import FeatureRoute, {
   IFeatureRouteConfig,
-} from '@app/component/util/feature-route.component';
-import NavRoute from '@app/component/util/nav-route.component';
+} from '@app/component/route/feature-route.component';
+import NavRoute from '@app/component/route/nav-route.component';
 import { getFeatureConfig } from '@app/enum/feature-map.enum';
 import {
   FeaturePageType,

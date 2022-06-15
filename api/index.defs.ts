@@ -102,6 +102,23 @@ export class AuthValid {
   }
 }
 
+export class FeatureInfo {
+  /**  */
+  'featureId'?: string;
+
+  /**  */
+  'featureName'?: string;
+
+  /**  */
+  'featureState'?: boolean;
+
+  constructor(data: undefined | any = {}) {
+    this['featureId'] = data['featureId'];
+    this['featureName'] = data['featureName'];
+    this['featureState'] = data['featureState'];
+  }
+}
+
 export class GoogleIdToken {
   /**  */
   'header'?: object;
@@ -120,6 +137,44 @@ export class GoogleIdToken {
     this['payload'] = data['payload'];
     this['signatureBytes'] = data['signatureBytes'];
     this['signedContentBytes'] = data['signedContentBytes'];
+  }
+}
+
+export class Group {
+  /**  */
+  'description'?: string;
+
+  /**  */
+  'id'?: string;
+
+  /**  */
+  'lastUpdateDate'?: Date;
+
+  /**  */
+  'members'?: GroupMember[];
+
+  /**  */
+  'name'?: string;
+
+  constructor(data: undefined | any = {}) {
+    this['description'] = data['description'];
+    this['id'] = data['id'];
+    this['lastUpdateDate'] = data['lastUpdateDate'];
+    this['members'] = data['members'];
+    this['name'] = data['name'];
+  }
+}
+
+export class GroupMember {
+  /**  */
+  'id'?: string;
+
+  /**  */
+  'role'?: EnumGroupMemberRole;
+
+  constructor(data: undefined | any = {}) {
+    this['id'] = data['id'];
+    this['role'] = data['role'];
   }
 }
 
@@ -221,6 +276,11 @@ export class UserInfo {
     this['name'] = data['name'];
     this['photoUrl'] = data['photoUrl'];
   }
+}
+export enum EnumGroupMemberRole {
+  'MAINTAINER' = 'MAINTAINER',
+  'ADMIN' = 'ADMIN',
+  'MEMBER' = 'MEMBER'
 }
 export enum EnumJwtUserLoginType {
   'GENERAL' = 'GENERAL',

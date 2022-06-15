@@ -1,14 +1,13 @@
-import NavRoute from '@app/component/util/nav-route.component';
+import NavRoute from '@app/component/route/nav-route.component';
 import featureLoader, {
   IFeatureConfig,
-} from '@app/component/util/feature-loader.hoc';
+} from '@app/component/route/feature-loader.hoc';
 import FeatureRoute, {
   IFeatureRouteConfig,
-} from '@app/component/util/feature-route.component';
+} from '@app/component/route/feature-route.component';
 import { getFeatureConfig } from '@app/enum/feature-map.enum';
 import { FeatureRouteType } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
-import { FeaturePath } from '@app/enum/feature-path.enum';
 import ManagementIndex from './management-index/management-index.container';
 import UrlBoard from './url-board/url-board.container';
 import GroupBoard from './group-board/group-board.container';
@@ -22,15 +21,16 @@ const routes: IFeatureRouteConfig[] = [
     element: ManagementIndex,
   },
   {
-    path: FeaturePath.UrlBoard,
+    path: featureItem?.featureRoute?.['url-board'],
     element: UrlBoard,
   },
   {
-    path: FeaturePath.GroupBoard,
+    path: featureItem?.featureRoute?.['group-board'],
     element: GroupBoard,
   },
   {
-    path: FeaturePath.EachGroupBoard,
+    path: featureItem?.featureRoute?.['group-board'],
+    params: [':id'],
     element: EachGroupBoard,
   },
   {

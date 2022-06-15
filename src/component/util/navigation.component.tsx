@@ -7,10 +7,12 @@ import LogoImage from '@app/assets/logo.svg';
 
 // constants
 import { NAVIGATION_DEFAULT_LIST } from '@app/constants/list';
-import { FeaturePath } from '@app/enum/feature-path.enum';
 
 // mui components
 import { ListItemIcon, MenuItem, Typography } from '@mui/material';
+import { FeaturePageType } from '@app/enum/feature-page-type.enum';
+import { getFeatureDefaultPath } from '@app/enum/feature-map.enum';
+import { Feature } from '@app/enum/feature.enum';
 
 const mockSubItems = [
   {
@@ -35,7 +37,7 @@ const Navigation: FC = () => {
     // Get group subItems from api
     const tempCompletedList = [...navigationList];
     const groupIndex = tempCompletedList.findIndex(
-      (navItem) => navItem.path === FeaturePath.GroupBoard,
+      (navItem) => navItem.path === FeaturePageType.GroupBoard,
     );
     tempCompletedList[groupIndex].subItems = mockSubItems;
 
@@ -111,7 +113,7 @@ const Navigation: FC = () => {
       </div>
 
       <NavLink
-        to={`/${FeaturePath.Home}`}
+        to={getFeatureDefaultPath(Feature.Home)!}
         className="text-black hover:text-main-blue-300"
       >
         <Typography className="text-sm pl-5 py-2 underline">

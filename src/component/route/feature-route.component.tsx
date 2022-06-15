@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 
 export interface IFeatureRouteConfig {
   path: FeaturePageType | FeatureRouteType | FeaturePath | undefined;
+  params?: String[];
   element: FC;
   guard?: FC[];
 }
@@ -23,23 +24,24 @@ const defaultProps: IProps = {
 };
 
 const FeatureRoute: FC<IProps> = (props) => {
-  const { routes, endFix, children } = props;
+  const { routes, endFix } = props;
 
   return (
     <Routes>
       {routes
         .filter((x) => x.path !== undefined)
         .map((route) => {
-          let path = route.path as string;
+          let path = `/${route.path}`;
           if (
             !Object.values(FeatureRouteType).includes(
               route.path as FeatureRouteType,
             )
           ) {
+            if (route.params) {
+              path += `/${route.params.join('/')}`;
+            }
             if (endFix) {
-              path = `/${route.path}${endFix}`;
-            } else {
-              path = `/${route.path}`;
+              path += endFix;
             }
           }
 

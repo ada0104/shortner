@@ -1,10 +1,8 @@
-import { FeaturePath } from '@app/enum/feature-path.enum';
-
-type FeaturePathType = `${FeaturePath}`;
+import { FeaturePageType } from '@app/enum/feature-page-type.enum';
 
 interface INavigationItem {
   label: string;
-  path: FeaturePathType;
+  path: FeaturePageType;
   icon: string;
   subItems?: Array<{ label: string; id: string }>;
 }
@@ -12,12 +10,12 @@ interface INavigationItem {
 export const NAVIGATION_DEFAULT_LIST: Array<INavigationItem> = [
   {
     label: 'URL Board',
-    path: FeaturePath.UrlBoard,
+    path: FeaturePageType.UrlBoard,
     icon: 'ri-link',
   },
   {
     label: '群組列表',
-    path: FeaturePath.GroupBoard,
+    path: FeaturePageType.GroupBoard,
     icon: 'ri-group-fill',
     subItems: [],
   },

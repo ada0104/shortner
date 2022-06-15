@@ -1,4 +1,4 @@
-import { IFeatureConfig } from '@app/component/util/feature-loader.hoc';
+import { IFeatureConfig } from '@app/component/route/feature-loader.hoc';
 import { FeaturePageType } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
 import { createContext } from 'react';
