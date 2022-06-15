@@ -1,19 +1,24 @@
-import Dashboard from '@app/core/component/dashboard.component';
+import Dashboard from '@app/component/util/dashboard.component';
 import HomeRoute from './feature/home/home.route';
 import { FeaturePath } from './enum/feature-path.enum';
 import { FeatureRouteType } from './enum/feature-page-type.enum';
 import FeatureRoute, {
   IFeatureRouteConfig,
-} from './component/util/feature-route.component';
+} from './component/route/feature-route.component';
 import LandingRoute from './feature/landing/landing.route';
 import ManagementRoute from './feature/management/management.route';
 import ErrorRoute from './feature/error/error.route';
 import UserCenterRoute from './feature/user-center/user-center.route';
-import NavRoute from './component/util/nav-route.component';
+import NavRoute from './component/route/nav-route.component';
 import AuthGuard from './core/guard/auth.guard';
+import Landing from './feature/landing/landing';
 
 const routes: IFeatureRouteConfig[] = [
   // #region
+  {
+    path: FeaturePath.Landing,
+    element: LandingRoute,
+  },
   {
     path: FeaturePath.Home,
     element: HomeRoute,
@@ -38,7 +43,7 @@ const routes: IFeatureRouteConfig[] = [
   // #endregion
   {
     path: FeatureRouteType.Match,
-    element: LandingRoute,
+    element: Landing,
   },
   {
     path: FeatureRouteType.All,

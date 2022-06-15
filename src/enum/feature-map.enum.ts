@@ -11,9 +11,9 @@ export interface IFeatureMapItem {
   // feature path
   featurePath: FeaturePath;
   // feature route
-  featureRoute?: { [key in FeaturePageType]?: FeaturePageType };
+  featureRoute: { [key in FeaturePageType]?: FeaturePageType };
   // feature default page
-  featureDefaultRoute?: FeaturePageType;
+  featureDefaultRoute: FeaturePageType;
   notLoadResource?: boolean;
 }
 
@@ -21,6 +21,10 @@ const featureMap: IFeatureMapItem[] = [
   {
     featureId: Feature.Landing,
     featurePath: FeaturePath.Landing,
+    featureRoute: {
+      index: FeaturePageType.Index,
+    },
+    featureDefaultRoute: FeaturePageType.Index,
     notLoadResource: true,
   },
   {
@@ -47,7 +51,7 @@ const featureMap: IFeatureMapItem[] = [
       'url-board': FeaturePageType.UrlBoard,
       'group-board': FeaturePageType.GroupBoard,
     },
-    notLoadResource: true,
+    featureDefaultRoute: FeaturePageType.Index,
   },
   {
     featureId: Feature.Error,
@@ -67,10 +71,14 @@ export const getFeatureDefaultPath = (featureId: Feature) => {
 
   let path;
 
-  if (featureMapItem && featureMapItem.featureDefaultRoute) {
-    path = `/${featureMapItem.featurePath}/${featureMapItem.featureDefaultRoute}`;
-  } else if (featureMapItem) {
-    path = `/${featureMapItem.featurePath}`;
+  if (featureMapItem) {
+    if (featureMapItem.featureParentPath) {
+      path = `/${featureMapItem.featureParentPath.join('/')}/${
+        featureMapItem.featurePath
+      }/${featureMapItem.featureDefaultRoute}`;
+    } else {
+      path = `/${featureMapItem.featurePath}/${featureMapItem.featureDefaultRoute}`;
+    }
   }
 
   return path;
@@ -84,14 +92,16 @@ export const getFeatureFullPath = (
     (x) => x.featureId === featureId,
   );
 
-  let path;
+  let path: string | undefined = featureMapItem?.featureRoute[pageType];
 
-  if (
-    featureMapItem &&
-    featureMapItem.featureRoute &&
-    featureMapItem.featureRoute[pageType]
-  ) {
-    path = `/${featureMapItem.featurePath}/${pageType}`;
+  if (featureMapItem) {
+    if (featureMapItem.featureParentPath) {
+      path = `/${featureMapItem.featureParentPath.join('/')}/${
+        featureMapItem.featurePath
+      }/${path}`;
+    } else {
+      path = `/${featureMapItem.featurePath}/${path}`;
+    }
   }
 
   return path;

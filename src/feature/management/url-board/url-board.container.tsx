@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useState, SyntheticEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 // components
-import UrlTable from '@app/core/component/url-table-component';
+import UrlTable from '@app/component/url/url-table-component';
 
 // mocks
 import { urlRows } from '@app/mock/url';

@@ -10,6 +10,11 @@ import { AppBar, Avatar, Button, Typography } from '@mui/material';
 // components
 import { FeaturePath } from '@app/enum/feature-path.enum';
 import Navigation from './navigation.component';
+import {
+  getFeatureDefaultPath,
+  getFeatureFullPath,
+} from '@app/enum/feature-map.enum';
+import { Feature } from '@app/enum/feature.enum';
 
 // constants
 
@@ -27,7 +32,7 @@ const Dashboard: FC = (props) => {
         >
           <div className="flex items-center">
             <NavLink
-              to={`/${FeaturePath.UserCenter}`}
+              to={getFeatureDefaultPath(Feature.UserCenter)!}
               className="text-black hover:text-main-blue-300 mr-6 flex items-center"
             >
               <Avatar alt="default" src={AvatarDefaultImage} className="mr-2" />
