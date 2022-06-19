@@ -1,9 +1,7 @@
 import FeatureContext from '@app/core/context/feature.context';
-import { FeaturePageType } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
 import { Button } from '@mui/material';
 import { FC, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './landing-index.container.css';
 
 // images
@@ -14,8 +12,6 @@ import MoneyImage from '@app/assets/money.svg';
 import PeopleImage from '@app/assets/people.svg';
 
 const Landing: FC = () => {
-  const navigate = useNavigate();
-
   const { nextFeature } = useContext(FeatureContext);
 
   const next = (featureId: Feature) => {
