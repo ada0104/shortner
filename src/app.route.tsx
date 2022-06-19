@@ -1,5 +1,6 @@
 import Dashboard from '@app/component/util/dashboard.component';
 import HomeRoute from './feature/home/home.route';
+import LoginRoute from './feature/login/login.route';
 import { FeaturePath } from './enum/feature-path.enum';
 import { FeatureRouteType } from './enum/feature-page-type.enum';
 import FeatureRoute, {
@@ -11,7 +12,7 @@ import ErrorRoute from './feature/error/error.route';
 import UserCenterRoute from './feature/user-center/user-center.route';
 import NavRoute from './component/route/nav-route.component';
 import AuthGuard from './core/guard/auth.guard';
-import Landing from './feature/landing/landing';
+import Landing from './feature/landing/landing-index/landing-index.container';
 
 const routes: IFeatureRouteConfig[] = [
   // #region
@@ -25,6 +26,14 @@ const routes: IFeatureRouteConfig[] = [
     guard: [AuthGuard],
   },
   {
+    path: FeaturePath.Login,
+    element: LoginRoute,
+  },
+  {
+    path: FeaturePath.Error,
+    element: ErrorRoute,
+  },
+  {
     path: FeaturePath.Management,
     element: () => (
       <Dashboard>
@@ -35,10 +44,6 @@ const routes: IFeatureRouteConfig[] = [
   {
     path: FeaturePath.UserCenter,
     element: UserCenterRoute,
-  },
-  {
-    path: FeaturePath.Error,
-    element: ErrorRoute,
   },
   // #endregion
   {

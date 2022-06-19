@@ -7,11 +7,9 @@ import { ApiAction } from '@app/store/api.slice';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { FC, useEffect, useMemo } from 'react';
 import Loader from '../../component/util/loader.component';
-import { UtilAction } from '@app/store/util.slice';
 import { UserAction } from '@app/store/user.slice';
 import { useNavigate } from 'react-router-dom';
 import { getFeatureDefaultPath } from '@app/enum/feature-map.enum';
-import Landing from '@app/feature/landing/landing';
 import { Feature } from '@app/enum/feature.enum';
 
 const ax = axios.create({
