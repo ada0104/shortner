@@ -12,7 +12,8 @@ import ErrorRoute from './feature/error/error.route';
 import UserCenterRoute from './feature/user-center/user-center.route';
 import NavRoute from './component/route/nav-route.component';
 import AuthGuard from './core/guard/auth.guard';
-import Landing from './feature/landing/landing-index/landing-index.container';
+import { getFeatureDefaultPath } from './enum/feature-map.enum';
+import { Feature } from './enum/feature.enum';
 
 const routes: IFeatureRouteConfig[] = [
   // #region
@@ -48,11 +49,11 @@ const routes: IFeatureRouteConfig[] = [
   // #endregion
   {
     path: FeatureRouteType.Match,
-    element: Landing,
+    element: () => <NavRoute route={Feature.Landing} />,
   },
   {
     path: FeatureRouteType.All,
-    element: () => <NavRoute />,
+    element: () => <NavRoute route={Feature.Landing} />,
   },
 ];
 

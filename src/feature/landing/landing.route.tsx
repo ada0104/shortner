@@ -11,14 +11,14 @@ import {
   FeatureRouteType,
 } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
-import Landing from './landing-index/landing-index.container';
+import LandingIndex from './landing-index/landing-index.container';
 
 const featureItem = getFeatureConfig(Feature.Landing);
 
 const routes: IFeatureRouteConfig[] = [
   {
     path: FeaturePageType.Index,
-    element: Landing,
+    element: LandingIndex,
   },
   {
     path: FeatureRouteType.Match,
