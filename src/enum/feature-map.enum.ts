@@ -36,6 +36,14 @@ const featureMap: IFeatureMapItem[] = [
     },
   },
   {
+    featureId: Feature.Login,
+    featurePath: FeaturePath.Login,
+    featureDefaultRoute: FeaturePageType.Index,
+    featureRoute: {
+      index: FeaturePageType.Index,
+    },
+  },
+  {
     featureId: Feature.UserCenter,
     featurePath: FeaturePath.UserCenter,
     featureDefaultRoute: FeaturePageType.Index,

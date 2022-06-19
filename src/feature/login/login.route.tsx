@@ -1,24 +1,21 @@
+import NavRoute from '@app/component/route/nav-route.component';
 import featureLoader, {
   IFeatureConfig,
 } from '@app/component/route/feature-loader.hoc';
 import FeatureRoute, {
   IFeatureRouteConfig,
 } from '@app/component/route/feature-route.component';
-import NavRoute from '@app/component/route/nav-route.component';
 import { getFeatureConfig } from '@app/enum/feature-map.enum';
-import {
-  FeaturePageType,
-  FeatureRouteType,
-} from '@app/enum/feature-page-type.enum';
+import { FeatureRouteType } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
-import Landing from './landing-index/landing-index.container';
+import LoginIndex from './login-index/login-index.container';
 
-const featureItem = getFeatureConfig(Feature.Landing);
+const featureItem = getFeatureConfig(Feature.Login);
 
 const routes: IFeatureRouteConfig[] = [
   {
-    path: FeaturePageType.Index,
-    element: Landing,
+    path: featureItem?.featureRoute?.index,
+    element: LoginIndex,
   },
   {
     path: FeatureRouteType.Match,

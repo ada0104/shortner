@@ -1,0 +1,131 @@
+.div1 {
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    left: 60%;
+    top: 0%;
+    background: #3064B9;
+}
+
+.img1 {
+    position: absolute;
+    width: 55%;
+    height: 56%;
+    left: 45%;
+    top: 21%;
+}
+
+.landingLogo {
+    position: absolute;
+    width: 15%;
+    height: 3%;
+    left: 85%;
+    top: 94%;
+}
+
+.cloud {
+    position: absolute;
+    width: 8%;
+    height: 12%;
+    left: 65%;
+    top: 15%;
+}
+
+.money {
+    position: absolute;
+    width: 4%;
+    height: 5%;
+    left: 67%;
+    top: 35%;
+}
+
+.people {
+    position: absolute;
+    width: 6%;
+    height: 8%;
+    left: 75%;
+    top: 29%;
+}
+
+.div2 {
+    position: absolute;
+    width: 37%;
+    height: 43%;
+    left: 4.5%;
+    top: 29%;
+}
+
+.title {
+    position: relative;
+    margin: 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 3rem;
+    line-height: 100%;
+    color: #000000;
+}
+
+.context {
+    position: relative;
+    margin: 2% 0%;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 100%;
+    color: #000000;
+}
+
+.start {
+    position: relative;
+    width: 25%;
+    border-radius: 40px;
+}
+
+.hr {
+    position: relative;
+    height: 20px;
+    border-bottom: 1px solid #A5A5A5;
+}
+
+.icon {
+    display:flex;
+    margin-top: 3%;
+}
+
+.boxIcon {
+    flex:1;
+}
+
+.box {
+    font-size: 1.5rem;
+}
+
+.littleTitle{
+    position: relative;
+    margin: 0;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 29px;
+    color: #000000;
+}
+
+.icontext {
+    position: relative;
+    margin-top: 0;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-size: 0.7rem;
+    color: #000000;
+}
+
+.chartIcon {
+    flex:1;
+}
+
+.chart {
+    font-size: 1.5rem;
+}
