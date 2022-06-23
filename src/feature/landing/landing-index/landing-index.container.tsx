@@ -20,12 +20,13 @@ const Landing: FC = () => {
 
   return (
     <>
-      <div className="div1"></div>
-      <img className="img1" src={LadingtImage} alt="" />
-      <img className="landingLogo" src={LandingLogoImage} alt="" />
-      <img className="cloud" src={CloudImage} alt="" />
-      <img className="money" src={MoneyImage} alt="" />
-      <img className="people" src={PeopleImage} alt="" />
+      <div className="div1">
+        <img className="img1" src={LadingtImage} alt="" />
+        <img className="landingLogo" src={LandingLogoImage} alt="" />
+        <img className="cloud" src={CloudImage} alt="" />
+        <img className="money" src={MoneyImage} alt="" />
+        <img className="people" src={PeopleImage} alt="" />
+      </div>
       <div className="div2">
         <p className="title">
           CREATE YOUR<br></br>OWN SHORT LINK
