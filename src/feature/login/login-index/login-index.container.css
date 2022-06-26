@@ -1,0 +1,72 @@
+body {
+    background: #E5E5E5;
+    font-size: 12px;
+}
+
+.loginblock {
+    position: fixed;
+    width: 57%;
+    height: 90%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+    position: absolute;
+    width: 18%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 14%;
+}
+
+.welcome {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    right: 0;
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.googleBtn {
+    position: absolute;
+    width: 45%;
+    top: 25%;
+    left: 0;
+    right: 0;
+    height: 6%;
+    margin: 2% auto;
+    background: #D95140;
+    border-radius: 15px;
+    color: #FFF;
+    border-color: #FFF;
+}
+
+.googlelogo {
+    position: relative;
+    vertical-align: middle;
+    right: 2%;
+}
+
+.facebook {
+    position: absolute;
+    width: 45%;
+    top: 33%;
+    left: 0;
+    right: 0;
+    height: 6%;
+    margin: 2% auto;
+    background: #D95140;
+    border-radius: 15px;
+    color: #FFF;
+    border-color: #FFF;
+}
+

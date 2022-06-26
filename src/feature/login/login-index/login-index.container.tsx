@@ -6,6 +6,10 @@ import { Feature } from '@app/enum/feature.enum';
 
 import { useContext } from 'react';
 import { Button } from '@mui/material';
+import './login-index.container.css';
+
+// image
+import LoginLogoImage from '@app/assets/loginlogo.svg';
 
 const LoginIndex = () => {
   const featureContext = useContext(FeatureContext);
@@ -17,15 +21,28 @@ const LoginIndex = () => {
   };
 
   return (
-    <BasePage>
-      <h2>Login</h2>
-      <Button variant="contained" onClick={() => next(Feature.Home)}>
+    <>
+    {/* <BasePage>
+    </BasePage> */}
+
+    <div className="loginblock">
+      <img className="logo" src={LoginLogoImage} alt="" />
+      <p className="welcome">歡迎使用SHORTNER</p>
+      <GoogleLoginBtn />
+      <div className="facebook">
+        <FacebookLoginBtn />
+      </div>
+      <div className="apple">
+
+      </div>
+      <div></div>
+      <div></div>
+      <Button variant="contained" className="" onClick={() => next(Feature.Home)}>
         首頁
       </Button>
       <hr />
-      <GoogleLoginBtn />
-      <FacebookLoginBtn />
-    </BasePage>
+    </div>
+    </>
   );
 };
 
