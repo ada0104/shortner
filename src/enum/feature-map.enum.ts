@@ -42,6 +42,7 @@ const featureMap: IFeatureMapItem[] = [
     featureRoute: {
       index: FeaturePageType.Index,
     },
+    notLoadResource: true,
   },
   {
     featureId: Feature.UserCenter,

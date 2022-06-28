@@ -28,7 +28,7 @@ const NavRoute: FC<IProps> = (props) => {
   }, [route]);
 
   if (redirectPath) {
-    return <Navigate to={`${route}`} replace />;
+    return <Navigate to={`${redirectPath}`} replace />;
   }
 
   return <Navigate to={`${notFoundPath}`} replace />;

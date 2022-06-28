@@ -1,6 +1,7 @@
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const OUTPUT = path.join(__dirname, './dist');
@@ -10,15 +11,22 @@ module.exports = (env) => {
 
   const config = {
     entry: './src/index.tsx',
-    resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
-      plugins: [new TsconfigPathsPlugin()],
-    },
     output: {
       path: OUTPUT,
-      filename: 'bundle.[hash].js',
+      filename: 'js/[name].[hash].js',
     },
-    devtool: 'source-map',
+    plugins: [
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: './public/index.html',
+      }),
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].[hash].css',
+      }),
+      new Dotenv({
+        path: envPath,
+      }),
+    ],
     module: {
       rules: [
         {
@@ -83,8 +91,8 @@ module.exports = (env) => {
           },
         },
         {
-          test: /\.(sass|less|css)$/,
-          use: ['style-loader', 'css-loader', 'postcss-loader'],
+          test: /\.(css|less|sass|scss)$/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
         },
         {
           test: /\.(png|jpe?g|gif|svg)$/i,
@@ -96,20 +104,17 @@ module.exports = (env) => {
         },
       ],
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: './public/index.html',
-      }),
-      new Dotenv({
-        path: envPath,
-      }),
-    ],
     devServer: {
       port: 3000,
       open: true,
       historyApiFallback: true,
     },
+
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+      plugins: [new TsconfigPathsPlugin()],
+    },
+    devtool: 'source-map',
   };
   return config;
 };

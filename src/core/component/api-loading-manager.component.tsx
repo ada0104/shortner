@@ -92,7 +92,7 @@ const ApiLoadingManager: FC = () => {
       if (error.response?.status === 401) {
         dispatch(UserAction.setJwtToken(null));
         // TODO: Adjust to login
-        navigate(getFeatureDefaultPath(Feature.Landing)!);
+        navigate(getFeatureDefaultPath(Feature.Login)!);
       }
 
       alert(`Response Error: ${error.response?.status}`);
