@@ -5,8 +5,8 @@ body {
 
 .loginblock {
     position: fixed;
-    width: 57%;
-    height: 90%;
+    width: 50%;
+    height: 87%;
     top: 0;
     bottom: 0;
     left: 0;
@@ -45,18 +45,19 @@ body {
     height: 6%;
     margin: 2% auto;
     background: #D95140;
-    border-radius: 15px;
+    border-radius: 20px;
     color: #FFF;
     border-color: #FFF;
+    border: none;
 }
 
-.googlelogo {
+.btnLogo {
     position: relative;
     vertical-align: middle;
     right: 2%;
 }
 
-.facebook {
+.facebookBtn {
     position: absolute;
     width: 45%;
     top: 33%;
@@ -64,9 +65,91 @@ body {
     right: 0;
     height: 6%;
     margin: 2% auto;
-    background: #D95140;
-    border-radius: 15px;
+    background: #1877F2;
+    border-radius: 20px;
     color: #FFF;
-    border-color: #FFF;
+    border: none;
 }
 
+.appleBtn {
+    position: absolute;
+    width: 45%;
+    top: 41%;
+    left: 0;
+    right: 0;
+    height: 6%;
+    margin: 2% auto;
+    color: #000;
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    border-radius: 20px;
+}
+
+.loginhr {
+    position: absolute;
+    width: 45%;
+    top: 47%;
+    left: 0;
+    right: 0;
+    margin: 2% auto;
+    height: 20px;
+    border-bottom: 1px solid #A5A5A5;
+}
+
+input{
+    position: relative;
+    box-sizing:border-box;
+    padding-left: 30px;
+    width: 100%;
+    line-height: 40px;
+    background: #FAFAFA;
+    border: 2px solid #A5A5A5;
+    border-radius: 20px;
+    font-size: medium;
+    margin: 2% 0%;
+}
+
+label {
+    position: relative;
+    line-height: 17px;
+    color: #A5A5A5;
+    font-size: 3px;
+}
+
+.form {
+    position: absolute;
+    width: 45%;
+    left: 0;
+    right: 0;
+    top: 51%;
+    margin: 2% auto;
+}
+
+.login {
+    width: 100%;
+    background: #FFFFFF;
+    border: 2px solid #A5A5A5;
+    border-radius: 20px;
+    margin: 4% 0;
+    padding:8px 0px;
+    font-weight: 700;
+    font-size: 1em;
+    color: #868686;
+}
+
+a:link {
+    color: #A5A5A5;
+}
+
+a:visited {
+    color: #1877F2;
+}
+
+.new {
+    display: inline;
+    float: right;
+    text-decoration: underline;
+    margin-left: 2%;
+    font-size: small;
+    display: inline-block;
+}
