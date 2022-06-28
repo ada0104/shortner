@@ -36,13 +36,17 @@ const LoginIndex = () => {
         </button>
         <div className="loginhr"></div>
         <div className="form">
-          <label htmlFor="email">電子信箱</label>
+          <label htmlFor="email">
+            電子信箱
+            <br />
+            <input type="email" id="email" />
+          </label>
           <br />
-          <input type="email" id="email" />
-          <br />
-          <label htmlFor="password">密碼</label>
-          <br />
-          <input type="password" id="password" />
+          <label htmlFor="password">
+            密碼
+            <br />
+            <input type="password" id="password" />
+          </label>
           <button type="submit" className="login">
             登入
           </button>
