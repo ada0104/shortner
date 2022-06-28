@@ -29,9 +29,13 @@ const GoogleLoginBtn: FC = () => {
     <GoogleLogin
       // autoLoad
       clientId={clientId}
-      render={renderProps => (
-        <button onClick={renderProps.onClick} className="googleBtn">
-          <img className="googlelogo" src={GoogleLogo} alt="" />
+      render={(renderProps) => (
+        <button
+          type="button"
+          onClick={renderProps.onClick}
+          className="googleBtn"
+        >
+          <img className="btnLogo" src={GoogleLogo} alt="" />
           使用Google帳號登入
         </button>
       )}
