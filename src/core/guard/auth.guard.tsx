@@ -8,7 +8,7 @@ const AuthGuard: FC = (props) => {
   const userInfo = useAppSelector((state) => state.user.userInfo);
   const [isLogin] = useState(userInfo !== null);
 
-  const landingPath = useMemo(() => getFeatureDefaultPath(Feature.Landing), []);
+  const landingPath = useMemo(() => getFeatureDefaultPath(Feature.Login), []);
 
   return isLogin ? <>{props.children}</> : <Navigate to={landingPath!} />;
 };
