@@ -4,6 +4,7 @@ import { signInWithGoogle } from '@app/service/auth/auth.service';
 import { UserAction } from '@app/store/user.slice';
 import { FC } from 'react';
 import { GoogleLogin } from 'react-google-login';
+import GoogleLogo from '@app/assets/googlelogo.svg';
 
 const clientId = environment.google_oauth_client_id;
 
@@ -28,7 +29,16 @@ const GoogleLoginBtn: FC = () => {
     <GoogleLogin
       // autoLoad
       clientId={clientId}
-      buttonText="Login"
+      render={(renderProps) => (
+        <button
+          type="button"
+          onClick={renderProps.onClick}
+          className="googleBtn"
+        >
+          <img className="btnLogo" src={GoogleLogo} alt="" />
+          使用Google帳號登入
+        </button>
+      )}
       onSuccess={success}
       onFailure={error}
       cookiePolicy="single_host_origin"
