@@ -50,12 +50,14 @@ const LoginIndex = () => {
           <button type="submit" className="login">
             登入
           </button>
-          <p className="new">
-            <a href="">忘記密碼？</a>
-          </p>
-          <p className="new">
-            <a href="">註冊新帳號</a>
-          </p>
+          <div className="link">
+            <div className="field">
+              <a href="Feature.Home">註冊新帳號</a>
+            </div>
+            <div className="field">
+              <a href="">忘記密碼？</a>
+            </div>
+          </div>
         </div>
       </div>
       {/* <Button
