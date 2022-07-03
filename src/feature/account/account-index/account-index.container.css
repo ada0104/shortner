@@ -1,0 +1,50 @@
+.accountBlock {
+    position: fixed;
+    width: 50%;
+    height: 70%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+.accountHr {
+    position: absolute;
+    width: 45%;
+    top: 23%;
+    left: 0;
+    right: 0;
+    margin: 2% auto;
+    height: 20px;
+    border-bottom: 1px solid #A5A5A5;
+}
+
+.accountForm {
+    position: absolute;
+    width: 45%;
+    left: 0;
+    right: 0;
+    top: 30%;
+    margin: 2% auto;
+}
+
+.submitEmail {
+    width: 100%;
+    background: #F9FBFF;
+    border: 2px solid #3064B9;
+    border-radius: 20px;
+    margin: 5% 0;
+    padding:9px 0px;
+    font-weight: 700;
+    font-size: 1em;
+    color: #3064B9;
+}
+
+.accountLink {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
