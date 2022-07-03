@@ -145,11 +145,17 @@ a:visited {
     color: #1877F2;
 }
 
-.new {
-    display: inline;
-    float: right;
-    text-decoration: underline;
+.link {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.field {
     margin-left: 2%;
+}
+
+a {
+    text-decoration: underline;
     font-size: small;
-    display: inline-block;
 }

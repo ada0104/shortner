@@ -1,19 +1,16 @@
 import BasePage from '@app/component/util/base-page.component';
 import FeatureContext from '@app/core/context/feature.context';
-import GoogleLoginBtn from '@app/component/auth/google-login.component';
-import FacebookLoginBtn from '@app/component/auth/facebook-login-component';
 import { Feature } from '@app/enum/feature.enum';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { useContext } from 'react';
-import './login-index.container.css';
+import './account-index.container.css';
 
 // image
 import LoginLogo from '@app/assets/loginlogo.svg';
-import AppleLogo from '@app/assets/applelogo.svg';
 
-const LoginIndex = () => {
+const AccountIndex = () => {
   const featureContext = useContext(FeatureContext);
 
   const { nextFeature, nextFeatureWithPage } = useContext(FeatureContext);
@@ -24,17 +21,11 @@ const LoginIndex = () => {
 
   return (
     <>
-      <div className="loginblock">
+      <div className="accountBlock">
         <img className="logo" src={LoginLogo} alt="" />
         <p className="welcome">歡迎使用SHORTNER</p>
-        <GoogleLoginBtn />
-        <FacebookLoginBtn />
-        <button type="button" className="appleBtn">
-          <img className="btnLogo" src={AppleLogo} alt="" />
-          使用Apple帳號登入
-        </button>
-        <div className="loginhr"></div>
-        <div className="form">
+        <div className="accountHr"></div>
+        <div className="accountForm">
           <label htmlFor="email">
             電子信箱
             <br />
@@ -46,15 +37,12 @@ const LoginIndex = () => {
             <br />
             <input type="password" id="password" />
           </label>
-          <button type="submit" className="login">
-            登入
-          </button>
-          <div className="link">
+          <Button type="submit" className="submitEmail">
+            發送Email驗證連結
+          </Button>
+          <div className="accountLink">
             <div className="field">
-              <Link to="/account/index">註冊新帳號</Link>
-            </div>
-            <div className="field">
-              <Link to="/password/index">忘記密碼？</Link>
+              <Link to="/login/index">回到登入頁面</Link>
             </div>
           </div>
         </div>
@@ -63,4 +51,4 @@ const LoginIndex = () => {
   );
 };
 
-export default LoginIndex;
+export default AccountIndex;

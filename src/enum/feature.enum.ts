@@ -3,6 +3,7 @@ export enum Feature {
   Landing = 'Landing',
   Home = 'Home',
   Login = 'Login',
+  Account = 'Account',
   Management = 'Management',
   UrlBoard = 'UrlBoard',
   GroupBoard = 'GroupBoard',
