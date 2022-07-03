@@ -4,6 +4,7 @@ export enum Feature {
   Home = 'Home',
   Login = 'Login',
   Account = 'Account',
+  Password = 'Password',
   Management = 'Management',
   UrlBoard = 'UrlBoard',
   GroupBoard = 'GroupBoard',
