@@ -1,16 +1,58 @@
+import { getFeatureDefaultPath } from './../../enum/feature-map.enum';
 import { UtilAction } from '@app/store/util.slice';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '@app/core/hook/hook';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '@app/core/hook/hook';
+import { getStorageItem } from '@app/service/util/storage.service';
+import { StorageType } from '@app/enum/storage-type.enum';
+import { authentication } from '@app/service/auth/auth.service';
+import { UserAction } from '@app/store/user.slice';
+import { Feature } from '@app/enum/feature.enum';
+import produce from 'immer';
 
 const usePreset = () => {
+  const [isEntryPathComplete, setEntryPathComplete] = useState(false);
+  const [isAuthComplete, setAuthComplete] = useState(false);
+
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
+  // Set entry path
   useEffect(() => {
-    // set entry path
-    dispatch(UtilAction.setEntryPath(location.pathname));
+    const loginPath = getFeatureDefaultPath(Feature.Login);
+    // prevent loop in login page
+    if (location.pathname !== loginPath) {
+      // set entry path for after login redirect
+      dispatch(UtilAction.setEntryPath(location.pathname));
+    }
+    setEntryPathComplete(true);
   }, []);
+
+  // Authentication
+  useEffect(() => {
+    const preAuth = async () => {
+      const jwtToken = getStorageItem<string>(StorageType.JWT_TOKEN);
+      if (jwtToken) {
+        const userInfo = await authentication(jwtToken);
+        dispatch(UserAction.setUserInfo(userInfo));
+        dispatch(UserAction.setJwtToken(jwtToken));
+
+        // TODO: filter account setting page
+        if (
+          location.pathname === '/' ||
+          location.pathname === getFeatureDefaultPath(Feature.Landing)
+        ) {
+          navigate(getFeatureDefaultPath(Feature.Home)!);
+        }
+      }
+
+      setAuthComplete(true);
+    };
+    preAuth();
+  }, []);
+
+  return isEntryPathComplete && isAuthComplete;
 };
 
 export default usePreset;
