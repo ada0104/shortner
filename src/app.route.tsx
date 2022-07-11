@@ -24,11 +24,6 @@ const routes: IFeatureRouteConfig[] = [
     element: LandingRoute,
   },
   {
-    path: FeaturePath.Home,
-    element: HomeRoute,
-    guard: [AuthGuard],
-  },
-  {
     path: FeaturePath.Login,
     element: LoginRoute,
   },
@@ -37,8 +32,14 @@ const routes: IFeatureRouteConfig[] = [
     element: AccountRoute,
   },
   {
+    path: FeaturePath.Home,
+    element: HomeRoute,
+    guard: [AuthGuard],
+  },
+  {
     path: FeaturePath.Password,
     element: PasswordRoute,
+    guard: [AuthGuard],
   },
   {
     path: FeaturePath.Error,
@@ -51,10 +52,12 @@ const routes: IFeatureRouteConfig[] = [
         <ManagementRoute />
       </Dashboard>
     ),
+    guard: [AuthGuard],
   },
   {
     path: FeaturePath.UserCenter,
     element: UserCenterRoute,
+    guard: [AuthGuard],
   },
   // #endregion
   {
