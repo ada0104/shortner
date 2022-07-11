@@ -1,13 +1,18 @@
 export enum Feature {
+  //============== Not Load Resource ==============//
   UnManaged = 'UnManaged',
   Landing = 'Landing',
-  Home = 'Home',
   Login = 'Login',
   Account = 'Account',
   Password = 'Password',
+  Error = 'Error',
+
+  //============== Not Load Resource ==============//
+  //==============  Load Resource    ==============//
+  Home = 'Home',
   Management = 'Management',
   UrlBoard = 'UrlBoard',
   GroupBoard = 'GroupBoard',
-  Error = 'Error',
   UserCenter = 'UserCenter',
+  //==============  Load Resource    ==============//
 }

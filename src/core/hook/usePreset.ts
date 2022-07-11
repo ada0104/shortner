@@ -41,7 +41,8 @@ const usePreset = () => {
         // TODO: filter account setting page
         if (
           location.pathname === '/' ||
-          location.pathname === getFeatureDefaultPath(Feature.Landing)
+          location.pathname === getFeatureDefaultPath(Feature.Landing) ||
+          location.pathname === getFeatureDefaultPath(Feature.Login)
         ) {
           navigate(getFeatureDefaultPath(Feature.Home)!);
         }

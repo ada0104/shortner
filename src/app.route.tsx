@@ -28,13 +28,12 @@ const routes: IFeatureRouteConfig[] = [
     element: LoginRoute,
   },
   {
-    path: FeaturePath.Home,
-    element: HomeRoute,
-    guard: [AuthGuard],
-  },
-  {
     path: FeaturePath.Account,
     element: AccountRoute,
+  },
+  {
+    path: FeaturePath.Home,
+    element: HomeRoute,
     guard: [AuthGuard],
   },
   {

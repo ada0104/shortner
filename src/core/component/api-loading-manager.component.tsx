@@ -21,6 +21,7 @@ const ax = axios.create({
 const ApiLoadingManager: FC = () => {
   const pendingList = useAppSelector((state) => state.api.apiPending);
   const historyList = useAppSelector((state) => state.api.apiHistory);
+  const jwtToken = useAppSelector((state) => state.user.jwtToken);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -29,6 +30,10 @@ const ApiLoadingManager: FC = () => {
       // set unique id in header
       const apiConfig = genApiTypeConfig(config.url!);
       config.headers = { ...config.headers, uniqueId: apiConfig.uniqueId };
+
+      if (jwtToken) {
+        config.headers.Authorization = `Bearer ${jwtToken}`;
+      }
 
       // set api pending
       dispatch(ApiAction.setApiPending(apiConfig));
@@ -91,7 +96,6 @@ const ApiLoadingManager: FC = () => {
       // 401
       if (error.response?.status === 401) {
         dispatch(UserAction.setJwtToken(null));
-        // TODO: Adjust to login
         navigate(getFeatureDefaultPath(Feature.Login)!);
       }
 
@@ -106,7 +110,7 @@ const ApiLoadingManager: FC = () => {
       onResponse,
       onResponseError,
     };
-  }, []);
+  }, [jwtToken]);
 
   useEffect(() => {
     // add request interceptors
@@ -127,7 +131,7 @@ const ApiLoadingManager: FC = () => {
       ax.interceptors.request.eject(reqInterceptor);
       ax.interceptors.response.eject(resInterceptor);
     };
-  }, []);
+  }, [jwtToken]);
 
   useEffect(() => {
     console.debug(historyList);
