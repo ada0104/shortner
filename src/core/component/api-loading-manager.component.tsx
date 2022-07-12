@@ -11,6 +11,8 @@ import { UserAction } from '@app/store/user.slice';
 import { useNavigate } from 'react-router-dom';
 import { getFeatureDefaultPath } from '@app/enum/feature-map.enum';
 import { Feature } from '@app/enum/feature.enum';
+import { removeStorageItem } from '@app/service/util/storage.service';
+import { StorageType } from '@app/enum/storage-type.enum';
 
 const ax = axios.create({
   baseURL: environment.api_host,
@@ -96,6 +98,8 @@ const ApiLoadingManager: FC = () => {
       // 401
       if (error.response?.status === 401) {
         dispatch(UserAction.setJwtToken(null));
+        dispatch(UserAction.setUserInfo(null));
+        removeStorageItem(StorageType.JWT_TOKEN);
         navigate(getFeatureDefaultPath(Feature.Login)!);
       }
 
