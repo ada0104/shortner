@@ -14,8 +14,6 @@ import LoginLogo from '@app/assets/loginlogo.svg';
 import AppleLogo from '@app/assets/applelogo.svg';
 
 const LoginIndex = () => {
-  const featureContext = useContext(FeatureContext);
-
   const { nextFeature, nextFeatureWithPage } = useContext(FeatureContext);
 
   const next = (featureId: Feature) => {

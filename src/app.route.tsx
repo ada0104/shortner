@@ -16,6 +16,7 @@ import NavRoute from './component/route/nav-route.component';
 import AuthGuard from './core/guard/auth.guard';
 import { getFeatureDefaultPath } from './enum/feature-map.enum';
 import { Feature } from './enum/feature.enum';
+import LoginGuard from './feature/login/login-guard';
 
 const routes: IFeatureRouteConfig[] = [
   // #region
@@ -26,6 +27,7 @@ const routes: IFeatureRouteConfig[] = [
   {
     path: FeaturePath.Login,
     element: LoginRoute,
+    guard: [LoginGuard],
   },
   {
     path: FeaturePath.Account,

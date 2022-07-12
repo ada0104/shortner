@@ -3,12 +3,14 @@ import { UtilAction } from '@app/store/util.slice';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@app/core/hook/hook';
-import { getStorageItem } from '@app/service/util/storage.service';
+import {
+  getStorageItem,
+  removeStorageItem,
+} from '@app/service/util/storage.service';
 import { StorageType } from '@app/enum/storage-type.enum';
 import { authentication } from '@app/service/auth/auth.service';
 import { UserAction } from '@app/store/user.slice';
 import { Feature } from '@app/enum/feature.enum';
-import produce from 'immer';
 
 const usePreset = () => {
   const [isEntryPathComplete, setEntryPathComplete] = useState(false);
@@ -21,8 +23,13 @@ const usePreset = () => {
   // Set entry path
   useEffect(() => {
     const loginPath = getFeatureDefaultPath(Feature.Login);
+    const landingPath = getFeatureDefaultPath(Feature.Landing);
     // prevent loop in login page
-    if (location.pathname !== loginPath) {
+    if (
+      location.pathname !== loginPath &&
+      location.pathname !== landingPath &&
+      location.pathname !== '/'
+    ) {
       // set entry path for after login redirect
       dispatch(UtilAction.setEntryPath(location.pathname));
     }
@@ -32,23 +39,22 @@ const usePreset = () => {
   // Authentication
   useEffect(() => {
     const preAuth = async () => {
-      const jwtToken = getStorageItem<string>(StorageType.JWT_TOKEN);
-      if (jwtToken) {
-        const userInfo = await authentication(jwtToken);
-        dispatch(UserAction.setUserInfo(userInfo));
-        dispatch(UserAction.setJwtToken(jwtToken));
+      try {
+        const jwtToken = getStorageItem<string>(StorageType.JWT_TOKEN);
+        if (jwtToken) {
+          const userInfo = await authentication(jwtToken);
+          dispatch(UserAction.setUserInfo(userInfo));
+          dispatch(UserAction.setJwtToken(jwtToken));
 
-        // TODO: filter account setting page
-        if (
-          location.pathname === '/' ||
-          location.pathname === getFeatureDefaultPath(Feature.Landing) ||
-          location.pathname === getFeatureDefaultPath(Feature.Login)
-        ) {
-          navigate(getFeatureDefaultPath(Feature.Home)!);
+          if (location.pathname === getFeatureDefaultPath(Feature.Login)) {
+            navigate(getFeatureDefaultPath(Feature.Home)!);
+          }
         }
+      } catch (e) {
+        removeStorageItem(StorageType.JWT_TOKEN);
+      } finally {
+        setAuthComplete(true);
       }
-
-      setAuthComplete(true);
     };
     preAuth();
   }, []);
