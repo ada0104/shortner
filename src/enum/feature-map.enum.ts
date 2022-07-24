@@ -54,8 +54,8 @@ const featureMap: IFeatureMapItem[] = [
     notLoadResource: true,
   },
   {
-    featureId: Feature.Password,
-    featurePath: FeaturePath.Password,
+    featureId: Feature.Resetpassword,
+    featurePath: FeaturePath.Resetpassword,
     featureDefaultRoute: FeaturePageType.Index,
     featureRoute: {
       index: FeaturePageType.Index,

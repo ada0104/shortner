@@ -1,24 +1,11 @@
-import BasePage from '@app/component/util/base-page.component';
-import FeatureContext from '@app/core/context/feature.context';
-import { Feature } from '@app/enum/feature.enum';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-
-import { useContext } from 'react';
 import './account-index.container.css';
 
 // image
 import LoginLogo from '@app/assets/loginlogo.svg';
 
 const AccountIndex = () => {
-  const featureContext = useContext(FeatureContext);
-
-  const { nextFeature, nextFeatureWithPage } = useContext(FeatureContext);
-
-  const next = (featureId: Feature) => {
-    nextFeature(featureId);
-  };
-
   return (
     <>
       <div className="accountBlock">

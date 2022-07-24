@@ -1,8 +1,8 @@
 import Dashboard from '@app/component/util/dashboard.component';
 import HomeRoute from './feature/home/home.route';
 import LoginRoute from './feature/login/login.route';
-import AccountRoute from './feature/account/account.route';
-import PasswordRoute from './feature/password/password.route';
+import AccountRoute from './feature/login/account.route';
+import ResetpasswordRoute from './feature/login/resetpassword.route';
 import { FeaturePath } from './enum/feature-path.enum';
 import { FeatureRouteType } from './enum/feature-page-type.enum';
 import FeatureRoute, {
@@ -39,8 +39,8 @@ const routes: IFeatureRouteConfig[] = [
     guard: [AuthGuard],
   },
   {
-    path: FeaturePath.Password,
-    element: PasswordRoute,
+    path: FeaturePath.Resetpassword,
+    element: ResetpasswordRoute,
     guard: [AuthGuard],
   },
   {

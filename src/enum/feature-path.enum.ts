@@ -3,7 +3,7 @@ export enum FeaturePath {
   Home = 'home',
   Login = 'login',
   Account = 'account',
-  Password = 'password',
+  Resetpassword = 'resetpassword',
   Error = 'error',
   Management = 'management',
   UserCenter = 'user-center',

@@ -8,14 +8,14 @@ import FeatureRoute, {
 import { getFeatureConfig } from '@app/enum/feature-map.enum';
 import { FeatureRouteType } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
-import PasswordIndex from './password-index/password-index.container';
+import ResetPasswordIndex from './resetpassword-index/resetpassword-index.container';
 
 const featureItem = getFeatureConfig(Feature.Account);
 
 const routes: IFeatureRouteConfig[] = [
   {
     path: featureItem?.featureRoute?.index,
-    element: PasswordIndex,
+    element: ResetPasswordIndex,
   },
   {
     path: FeatureRouteType.Match,

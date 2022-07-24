@@ -4,7 +4,7 @@ export enum Feature {
   Landing = 'Landing',
   Login = 'Login',
   Account = 'Account',
-  Password = 'Password',
+  Resetpassword = 'Resetpassword',
   Error = 'Error',
 
   //============== Not Load Resource ==============//
