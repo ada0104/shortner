@@ -41,25 +41,10 @@ const featureMap: IFeatureMapItem[] = [
     featureDefaultRoute: FeaturePageType.Index,
     featureRoute: {
       index: FeaturePageType.Index,
+      'account': FeaturePageType.Account,
+      'password': FeaturePageType.Password,
     },
     notLoadResource: true,
-  },
-  {
-    featureId: Feature.Account,
-    featurePath: FeaturePath.Account,
-    featureDefaultRoute: FeaturePageType.Index,
-    featureRoute: {
-      index: FeaturePageType.Index,
-    },
-    notLoadResource: true,
-  },
-  {
-    featureId: Feature.Resetpassword,
-    featurePath: FeaturePath.Resetpassword,
-    featureDefaultRoute: FeaturePageType.Index,
-    featureRoute: {
-      index: FeaturePageType.Index,
-    },
   },
   {
     featureId: Feature.UserCenter,

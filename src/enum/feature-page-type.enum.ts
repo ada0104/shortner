@@ -3,6 +3,8 @@ export enum FeaturePageType {
   NotFound = 'notFound',
   UrlBoard = 'url-board',
   GroupBoard = 'group-board',
+  Account = 'account',
+  Password = 'password',
 }
 
 export enum FeatureRouteType {

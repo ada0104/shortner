@@ -37,10 +37,10 @@ const LoginIndex = () => {
           </button>
           <div className="link">
             <div className="field">
-              <Link to="/account/index">註冊新帳號</Link>
+              <Link to="/login/account">註冊新帳號</Link>
             </div>
             <div className="field">
-              <Link to="/resetpassword/index">忘記密碼？</Link>
+              <Link to="/login/password">忘記密碼？</Link>
             </div>
           </div>
         </div>

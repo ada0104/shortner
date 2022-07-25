@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 // image
 import LoginLogo from '@app/assets/loginlogo.svg';
 
-const ResetPasswordIndex = () => {
+const Password = () => {
   return (
     <>
       <div className="accountBlock">
@@ -29,4 +29,4 @@ const ResetPasswordIndex = () => {
   );
 };
 
-export default ResetPasswordIndex;
+export default Password;

@@ -9,6 +9,8 @@ import { getFeatureConfig } from '@app/enum/feature-map.enum';
 import { FeatureRouteType } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
 import LoginIndex from './login-index/login-index.container';
+import LoginAccount from './account/account.container';
+import LoginPassword from './password/password.container';
 
 const featureItem = getFeatureConfig(Feature.Login);
 
@@ -16,6 +18,14 @@ const routes: IFeatureRouteConfig[] = [
   {
     path: featureItem?.featureRoute?.index,
     element: LoginIndex,
+  },
+  {
+    path: featureItem?.featureRoute?.['account'],
+    element: LoginAccount,
+  },
+  {
+    path: featureItem?.featureRoute?.['password'],
+    element: LoginPassword,
   },
   {
     path: FeatureRouteType.Match,

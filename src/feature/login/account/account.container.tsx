@@ -1,11 +1,11 @@
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import './account-index.container.css';
+import './account.container.css';
 
 // image
 import LoginLogo from '@app/assets/loginlogo.svg';
 
-const AccountIndex = () => {
+const Account = () => {
   return (
     <>
       <div className="accountBlock">
@@ -38,4 +38,4 @@ const AccountIndex = () => {
   );
 };
 
-export default AccountIndex;
+export default Account;
