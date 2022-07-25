@@ -67,7 +67,7 @@ Push-Image:
   rules:
     - if: '$CI_PIPELINE_SOURCE != "schedule"'
       when: never
-    - when: always
+    - when: never
   script:
     - docker login ${Docker_Registry_Url} -u ${Docker_Registry_UserName} -p ${Docker_Registry_Token}
     - docker build -t ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name} .
@@ -82,13 +82,12 @@ Deploy-App:
       when: never
     - when: always
   before_script:
-    - env
     - mkdir -p ~/.ssh
     - echo -e "${Server_SSH}" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-    - ssh ${Server_UserName}@${Server_IP} "docker images && docker ps -a"
+    - ssh -v ${Server_UserName}@${Server_IP} "docker images && docker ps -a"
     - ssh ${Server_UserName}@${Server_IP} "bash ~/clear-docker.sh ${App_Name} ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
     - ssh ${Server_UserName}@${Server_IP} "docker login ${Docker_Registry_Url} -u ${Docker_Registry_UserName} -p ${Docker_Registry_Token}"
     - ssh ${Server_UserName}@${Server_IP} "docker pull ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
