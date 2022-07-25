@@ -88,7 +88,7 @@ Deploy-App:
     - chmod 700 ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-    - ssh -v ${Server_UserName}@${Server_IP} "docker images && docker ps -a"
+    - ssh -vvv ${Server_UserName}@${Server_IP} "docker images && docker ps -a"
     - ssh ${Server_UserName}@${Server_IP} "bash ~/clear-docker.sh ${App_Name} ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
     - ssh ${Server_UserName}@${Server_IP} "docker login ${Docker_Registry_Url} -u ${Docker_Registry_UserName} -p ${Docker_Registry_Token}"
     - ssh ${Server_UserName}@${Server_IP} "docker pull ${Docker_Registry_Url}/${Docker_Registry_Group}/${App_Name}"
