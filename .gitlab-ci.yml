@@ -85,6 +85,7 @@ Deploy-App:
     - mkdir -p ~/.ssh
     - echo -e "${Server_SSH}" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - ssh -v ${Server_UserName}@${Server_IP} "docker images && docker ps -a"
