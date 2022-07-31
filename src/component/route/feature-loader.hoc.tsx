@@ -1,9 +1,9 @@
-import FeatureContext, {
-  FeatureContextValue,
-} from '@app/core/context/feature.context';
+import FeatureContext from '@app/core/context/feature.context';
 import {
+  defaultFeatureMapItem,
   getFeatureDefaultPath,
   getFeatureFullPath,
+  IFeatureMapItem,
 } from '@app/enum/feature-map.enum';
 import {
   FeaturePageType,
@@ -14,16 +14,13 @@ import useContent from '@app/core/hook/useContent';
 import { FC, ReactElement, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { IFeatureRouteConfig } from './feature-route.component';
-import Loader from '../util/loader.component';
 
-export interface IFeatureConfig {
-  featureId?: Feature;
-  featureRoute: IFeatureRouteConfig[];
-  notLoadResource?: boolean;
+export interface IFeatureConfig extends IFeatureMapItem {
+  routeSet: IFeatureRouteConfig[];
 }
 
 const featureLoader =
-  (featureConfig: IFeatureConfig) => (RouteComponent: () => ReactElement) => {
+  (featureConfig: IFeatureConfig) => (RouteComponent: ReactElement) => {
     const FeatureLoader: FC = () => {
       const location = useLocation();
       const navigate = useNavigate();
@@ -31,22 +28,21 @@ const featureLoader =
       // use feature content check feature is enable
       const isSuccess = featureConfig.notLoadResource
         ? true
-        : useContent(featureConfig.featureId ?? Feature.UnManaged);
+        : useContent(
+            featureConfig.featureId ?? defaultFeatureMapItem.featureId,
+          );
 
       // #region Route Navigate
 
       const redirectElementPage = (direction: 'next' | 'back') => {
         // get current route index
-        const currentRouteIndex = featureConfig.featureRoute.findIndex(
-          (item) => {
-            const pathItems = location.pathname.split('/');
-            const lastPathItem =
-              pathItems[pathItems.length - 1] ||
-              pathItems[pathItems.length - 2];
+        const currentRouteIndex = featureConfig.routeSet.findIndex((item) => {
+          const pathItems = location.pathname.split('/');
+          const lastPathItem =
+            pathItems[pathItems.length - 1] || pathItems[pathItems.length - 2];
 
-            return item.path === lastPathItem;
-          },
-        );
+          return item.path === lastPathItem;
+        });
 
         if (currentRouteIndex === -1) return;
 
@@ -54,12 +50,10 @@ const featureLoader =
 
         switch (direction) {
           case 'next':
-            navigatePath =
-              featureConfig.featureRoute[currentRouteIndex + 1].path;
+            navigatePath = featureConfig.routeSet[currentRouteIndex + 1].path;
             break;
           case 'back':
-            navigatePath =
-              featureConfig.featureRoute[currentRouteIndex - 1].path;
+            navigatePath = featureConfig.routeSet[currentRouteIndex - 1].path;
             break;
           default:
             break;
@@ -79,27 +73,20 @@ const featureLoader =
       };
 
       const nextFeature = (featureId: Feature) => {
-        const path = getFeatureDefaultPath(featureId);
-        if (path) {
-          navigate(path);
-        }
+        navigate(getFeatureDefaultPath(featureId));
       };
 
       const nextFeatureWithPage = (feature: {
         featureId: Feature;
         pageType: FeaturePageType;
       }) => {
-        const path = getFeatureFullPath(feature.featureId, feature.pageType);
-        if (path) {
-          navigate(path);
-        }
+        navigate(getFeatureFullPath(feature.featureId, feature.pageType));
       };
 
       // #endregion
 
       const contextValue = useMemo(
         () => ({
-          ...FeatureContextValue,
           ...featureConfig,
           redirectElementPage,
           nextFeature,
@@ -110,7 +97,7 @@ const featureLoader =
 
       return (
         <FeatureContext.Provider value={contextValue}>
-          {isSuccess ? <RouteComponent /> : <Loader />}
+          {isSuccess ? RouteComponent : <></>}
         </FeatureContext.Provider>
       );
     };

@@ -17,6 +17,15 @@ export interface IFeatureMapItem {
   notLoadResource?: boolean;
 }
 
+export const defaultFeatureMapItem: IFeatureMapItem = {
+  featureId: Feature.UnManaged,
+  featureParentPath: [],
+  featurePath: FeaturePath.Landing,
+  featureRoute: {},
+  featureDefaultRoute: FeaturePageType.Index,
+  notLoadResource: false,
+};
+
 const featureMap: IFeatureMapItem[] = [
   {
     featureId: Feature.Landing,
@@ -41,8 +50,8 @@ const featureMap: IFeatureMapItem[] = [
     featureDefaultRoute: FeaturePageType.Index,
     featureRoute: {
       index: FeaturePageType.Index,
-      'account': FeaturePageType.Account,
-      'password': FeaturePageType.Password,
+      account: FeaturePageType.Account,
+      password: FeaturePageType.Password,
     },
     notLoadResource: true,
   },
@@ -92,6 +101,8 @@ export const getFeatureDefaultPath = (featureId: Feature) => {
     }
   }
 
+  if (path === undefined) throw new Error('Feature Config Setting Error!');
+
   return path;
 };
 
@@ -115,9 +126,17 @@ export const getFeatureFullPath = (
     }
   }
 
+  if (path === undefined) throw new Error('Feature Config Setting Error!');
+
   return path;
 };
 
 export const getFeatureConfig = (featureId: Feature) => {
-  return cloneDeep([...featureMap]).find((x) => x.featureId === featureId);
+  const data = cloneDeep([...featureMap]).find(
+    (x) => x.featureId === featureId,
+  );
+
+  if (!data) throw new Error('Feature Config Setting Error!');
+
+  return data;
 };

@@ -39,7 +39,7 @@ const GoogleLoginBtn: FC = () => {
         dispatch(UtilAction.setEntryPath());
       } else {
         const homePath = getFeatureDefaultPath(Feature.Home);
-        navigate(homePath!);
+        navigate(homePath);
       }
     }
   };

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@app/core/hook/hook';
 import { genApiTypeConfig } from '@app/service/util/api.service';
 import { ApiAction } from '@app/store/api.slice';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { FC, useEffect, useMemo } from 'react';
+import { FC, memo, useEffect, useMemo } from 'react';
 import Loader from '../../component/util/loader.component';
 import { UserAction } from '@app/store/user.slice';
 import { useNavigate } from 'react-router-dom';
@@ -100,7 +100,7 @@ const ApiLoadingManager: FC = () => {
         dispatch(UserAction.setJwtToken(null));
         dispatch(UserAction.setUserInfo(null));
         removeStorageItem(StorageType.JWT_TOKEN);
-        navigate(getFeatureDefaultPath(Feature.Login)!);
+        navigate(getFeatureDefaultPath(Feature.Login));
       }
 
       alert(`Response Error: ${error.response?.status}`);
@@ -148,4 +148,4 @@ const ApiLoadingManager: FC = () => {
   return loadingCount ? <Loader /> : <div />;
 };
 
-export default ApiLoadingManager;
+export default memo(ApiLoadingManager);

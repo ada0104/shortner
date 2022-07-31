@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
 // images
@@ -8,12 +8,8 @@ import AvatarDefaultImage from '@app/assets/avatar.png';
 import { AppBar, Avatar, Button, Typography } from '@mui/material';
 
 // components
-import { FeaturePath } from '@app/enum/feature-path.enum';
 import Navigation from './navigation.component';
-import {
-  getFeatureDefaultPath,
-  getFeatureFullPath,
-} from '@app/enum/feature-map.enum';
+import { getFeatureDefaultPath } from '@app/enum/feature-map.enum';
 import { Feature } from '@app/enum/feature.enum';
 
 // constants
@@ -32,7 +28,7 @@ const Dashboard: FC = (props) => {
         >
           <div className="flex items-center">
             <NavLink
-              to={getFeatureDefaultPath(Feature.UserCenter)!}
+              to={getFeatureDefaultPath(Feature.UserCenter)}
               className="text-black hover:text-main-blue-300 mr-6 flex items-center"
             >
               <Avatar alt="default" src={AvatarDefaultImage} className="mr-2" />

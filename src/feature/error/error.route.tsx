@@ -1,6 +1,3 @@
-import featureLoader, {
-  IFeatureConfig,
-} from '@app/component/route/feature-loader.hoc';
 import FeatureRoute, {
   IFeatureRouteConfig,
 } from '@app/component/route/feature-route.component';
@@ -13,31 +10,25 @@ import {
 import { Feature } from '@app/enum/feature.enum';
 import ErrorNotFound from './error-notFound/not-found.container';
 
-const featureItem = getFeatureConfig(Feature.Error);
+const featureConfig = getFeatureConfig(Feature.Error);
 
 const routes: IFeatureRouteConfig[] = [
   {
-    path: FeaturePageType.NotFound,
+    path: featureConfig.featureRoute.notFound,
     element: ErrorNotFound,
   },
   {
     path: FeatureRouteType.Match,
-    element: () => <NavRoute route={featureItem?.featureDefaultRoute} />,
+    element: () => <NavRoute route={featureConfig.featureDefaultRoute} />,
   },
   {
     path: FeatureRouteType.All,
-    element: () => <NavRoute route={featureItem?.featureDefaultRoute} />,
+    element: () => <NavRoute route={featureConfig.featureDefaultRoute} />,
   },
 ];
 
-const featureConfig: IFeatureConfig = {
-  featureId: featureItem?.featureId,
-  featureRoute: routes,
-  notLoadResource: featureItem?.notLoadResource,
-};
-
 const Route = () => {
-  return <FeatureRoute routes={routes} />;
+  return <FeatureRoute routes={routes} featureConfig={featureConfig} />;
 };
 
-export default featureLoader(featureConfig)(Route);
+export default Route;

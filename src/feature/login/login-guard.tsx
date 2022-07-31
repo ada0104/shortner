@@ -9,7 +9,7 @@ const LoginGuard: FC = (props) => {
   const userInfo = useAppSelector((state) => state.user.userInfo);
 
   return jwtToken && userInfo ? (
-    <Navigate to={getFeatureDefaultPath(Feature.Home)!} replace />
+    <Navigate to={getFeatureDefaultPath(Feature.Home)} replace />
   ) : (
     <>{props.children}</>
   );

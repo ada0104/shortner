@@ -1,43 +1,31 @@
-import featureLoader, {
-  IFeatureConfig,
-} from '@app/component/route/feature-loader.hoc';
 import FeatureRoute, {
   IFeatureRouteConfig,
 } from '@app/component/route/feature-route.component';
 import NavRoute from '@app/component/route/nav-route.component';
 import { getFeatureConfig } from '@app/enum/feature-map.enum';
-import {
-  FeaturePageType,
-  FeatureRouteType,
-} from '@app/enum/feature-page-type.enum';
+import { FeatureRouteType } from '@app/enum/feature-page-type.enum';
 import { Feature } from '@app/enum/feature.enum';
 import LandingIndex from './landing-index/landing-index.container';
 
-const featureItem = getFeatureConfig(Feature.Landing);
+const featureConfig = getFeatureConfig(Feature.Landing);
 
 const routes: IFeatureRouteConfig[] = [
   {
-    path: FeaturePageType.Index,
+    path: featureConfig.featureRoute.index,
     element: LandingIndex,
   },
   {
     path: FeatureRouteType.Match,
-    element: () => <NavRoute route={featureItem?.featureDefaultRoute} />,
+    element: () => <NavRoute route={featureConfig.featureDefaultRoute} />,
   },
   {
     path: FeatureRouteType.All,
-    element: () => <NavRoute route={featureItem?.featureDefaultRoute} />,
+    element: () => <NavRoute route={featureConfig.featureDefaultRoute} />,
   },
 ];
 
-const featureConfig: IFeatureConfig = {
-  featureId: featureItem?.featureId,
-  featureRoute: routes,
-  notLoadResource: featureItem?.notLoadResource,
-};
-
 const Route = () => {
-  return <FeatureRoute routes={routes} />;
+  return <FeatureRoute routes={routes} featureConfig={featureConfig} />;
 };
 
-export default featureLoader(featureConfig)(Route);
+export default Route;

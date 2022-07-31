@@ -12,7 +12,6 @@ import ErrorRoute from './feature/error/error.route';
 import UserCenterRoute from './feature/user-center/user-center.route';
 import NavRoute from './component/route/nav-route.component';
 import AuthGuard from './core/guard/auth.guard';
-import { getFeatureDefaultPath } from './enum/feature-map.enum';
 import { Feature } from './enum/feature.enum';
 import LoginGuard from './feature/login/login-guard';
 

@@ -47,7 +47,7 @@ const usePreset = () => {
           dispatch(UserAction.setJwtToken(jwtToken));
 
           if (location.pathname === getFeatureDefaultPath(Feature.Login)) {
-            navigate(getFeatureDefaultPath(Feature.Home)!);
+            navigate(getFeatureDefaultPath(Feature.Home));
           }
         }
       } catch (e) {

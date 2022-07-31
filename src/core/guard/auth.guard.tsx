@@ -12,7 +12,7 @@ const AuthGuard: FC = (props) => {
   return userInfo !== null ? (
     <>{props.children}</>
   ) : (
-    <Navigate to={landingPath!} />
+    <Navigate to={landingPath} />
   );
 };
 
