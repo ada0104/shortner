@@ -15,7 +15,6 @@ import useContent from '@app/core/hook/useContent';
 import { FC, ReactElement, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { IFeatureRouteConfig } from './feature-route.component';
-import Loader from '../util/loader.component';
 
 export interface IFeatureConfig extends IFeatureMapItem {
   routeSet: IFeatureRouteConfig[];
@@ -102,7 +101,7 @@ const featureLoader =
 
       return (
         <FeatureContext.Provider value={contextValue}>
-          {isSuccess ? <RouteComponent /> : <Loader />}
+          {isSuccess ? <RouteComponent /> : <></>}
         </FeatureContext.Provider>
       );
     };
