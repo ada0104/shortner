@@ -113,7 +113,7 @@ const Navigation: FC = () => {
       </div>
 
       <NavLink
-        to={getFeatureDefaultPath(Feature.Home)!}
+        to={getFeatureDefaultPath(Feature.Home)}
         className="text-black hover:text-main-blue-300"
       >
         <Typography className="text-sm pl-5 py-2 underline">

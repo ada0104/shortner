@@ -1,5 +1,6 @@
 import { IFeatureConfig } from '@app/component/route/feature-loader.hoc';
 import { FeaturePageType } from '@app/enum/feature-page-type.enum';
+import { FeaturePath } from '@app/enum/feature-path.enum';
 import { Feature } from '@app/enum/feature.enum';
 import { createContext } from 'react';
 
@@ -14,7 +15,12 @@ export interface IFeatureContextConfig extends IFeatureConfig {
 
 export const FeatureContextValue: IFeatureContextConfig = {
   featureId: Feature.UnManaged,
-  featureRoute: [],
+  featureParentPath: [],
+  featurePath: FeaturePath.Landing,
+  featureRoute: {},
+  featureDefaultRoute: FeaturePageType.Index,
+  notLoadResource: false,
+  routeSet: [],
   redirectElementPage: (direction: 'next' | 'back') => {},
   nextFeature: (featureId: Feature) => {},
   nextFeatureWithPage: (feature: {

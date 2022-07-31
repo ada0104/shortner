@@ -16,7 +16,7 @@ const useContent = (featureId: Feature) => {
       } else {
         alert('Feature is not open!');
         // TODO: Feature is not open
-        navigate(getFeatureDefaultPath(Feature.Landing)!);
+        navigate(getFeatureDefaultPath(Feature.Landing));
       }
     };
     loadFeatureData();

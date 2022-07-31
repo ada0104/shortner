@@ -1,7 +1,4 @@
-import NavRoute from '@app/component/route/nav-route.component';
-import featureLoader, {
-  IFeatureConfig,
-} from '@app/component/route/feature-loader.hoc';
+import featureLoader from '@app/component/route/feature-loader.hoc';
 import FeatureRoute, {
   IFeatureRouteConfig,
 } from '@app/component/route/feature-route.component';
@@ -13,23 +10,23 @@ import UrlBoard from './url-board/url-board.container';
 import GroupBoard from './group-board/group-board.container';
 import EachGroupBoard from './each-group-board/each-group-board.container';
 
-const featureItem = getFeatureConfig(Feature.Management);
+const featureConfig = getFeatureConfig(Feature.Management);
 
 const routes: IFeatureRouteConfig[] = [
   {
-    path: featureItem?.featureRoute?.index,
+    path: featureConfig.featureRoute.index,
     element: ManagementIndex,
   },
   {
-    path: featureItem?.featureRoute?.['url-board'],
+    path: featureConfig.featureRoute['url-board'],
     element: UrlBoard,
   },
   {
-    path: featureItem?.featureRoute?.['group-board'],
+    path: featureConfig.featureRoute['group-board'],
     element: GroupBoard,
   },
   {
-    path: featureItem?.featureRoute?.['group-board'],
+    path: featureConfig.featureRoute['group-board'],
     params: [':id'],
     element: EachGroupBoard,
   },
@@ -39,14 +36,8 @@ const routes: IFeatureRouteConfig[] = [
   },
 ];
 
-const featureConfig: IFeatureConfig = {
-  featureId: featureItem?.featureId,
-  featureRoute: routes,
-  notLoadResource: featureItem?.notLoadResource,
-};
-
 const Route = () => {
   return <FeatureRoute routes={routes} />;
 };
 
-export default featureLoader(featureConfig)(Route);
+export default featureLoader({ ...featureConfig, routeSet: routes })(Route);

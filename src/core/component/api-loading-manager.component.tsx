@@ -100,7 +100,7 @@ const ApiLoadingManager: FC = () => {
         dispatch(UserAction.setJwtToken(null));
         dispatch(UserAction.setUserInfo(null));
         removeStorageItem(StorageType.JWT_TOKEN);
-        navigate(getFeatureDefaultPath(Feature.Login)!);
+        navigate(getFeatureDefaultPath(Feature.Login));
       }
 
       alert(`Response Error: ${error.response?.status}`);

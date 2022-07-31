@@ -1,7 +1,5 @@
 import NavRoute from '@app/component/route/nav-route.component';
-import featureLoader, {
-  IFeatureConfig,
-} from '@app/component/route/feature-loader.hoc';
+import featureLoader from '@app/component/route/feature-loader.hoc';
 import FeatureRoute, {
   IFeatureRouteConfig,
 } from '@app/component/route/feature-route.component';
@@ -12,39 +10,33 @@ import LoginIndex from './login-index/login-index.container';
 import LoginAccount from './account/account.container';
 import LoginPassword from './password/password.container';
 
-const featureItem = getFeatureConfig(Feature.Login);
+const featureConfig = getFeatureConfig(Feature.Login);
 
 const routes: IFeatureRouteConfig[] = [
   {
-    path: featureItem?.featureRoute?.index,
+    path: featureConfig.featureRoute.index,
     element: LoginIndex,
   },
   {
-    path: featureItem?.featureRoute?.['account'],
+    path: featureConfig.featureRoute.account,
     element: LoginAccount,
   },
   {
-    path: featureItem?.featureRoute?.['password'],
+    path: featureConfig.featureRoute.account,
     element: LoginPassword,
   },
   {
     path: FeatureRouteType.Match,
-    element: () => <NavRoute route={featureItem?.featureDefaultRoute} />,
+    element: () => <NavRoute route={featureConfig.featureDefaultRoute} />,
   },
   {
     path: FeatureRouteType.All,
-    element: () => <NavRoute route={featureItem?.featureDefaultRoute} />,
+    element: () => <NavRoute route={featureConfig.featureDefaultRoute} />,
   },
 ];
-
-const featureConfig: IFeatureConfig = {
-  featureId: featureItem?.featureId,
-  featureRoute: routes,
-  notLoadResource: featureItem?.notLoadResource,
-};
 
 const Route = () => {
   return <FeatureRoute routes={routes} />;
 };
 
-export default featureLoader(featureConfig)(Route);
+export default featureLoader({ ...featureConfig, routeSet: routes })(Route);
