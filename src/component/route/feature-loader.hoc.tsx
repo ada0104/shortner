@@ -1,7 +1,6 @@
-import FeatureContext, {
-  FeatureContextValue,
-} from '@app/core/context/feature.context';
+import FeatureContext from '@app/core/context/feature.context';
 import {
+  defaultFeatureMapItem,
   getFeatureDefaultPath,
   getFeatureFullPath,
   IFeatureMapItem,
@@ -21,7 +20,7 @@ export interface IFeatureConfig extends IFeatureMapItem {
 }
 
 const featureLoader =
-  (featureConfig: IFeatureConfig) => (RouteComponent: () => ReactElement) => {
+  (featureConfig: IFeatureConfig) => (RouteComponent: ReactElement) => {
     const FeatureLoader: FC = () => {
       const location = useLocation();
       const navigate = useNavigate();
@@ -29,7 +28,9 @@ const featureLoader =
       // use feature content check feature is enable
       const isSuccess = featureConfig.notLoadResource
         ? true
-        : useContent(featureConfig.featureId ?? Feature.UnManaged);
+        : useContent(
+            featureConfig.featureId ?? defaultFeatureMapItem.featureId,
+          );
 
       // #region Route Navigate
 
@@ -72,25 +73,20 @@ const featureLoader =
       };
 
       const nextFeature = (featureId: Feature) => {
-        const path = getFeatureDefaultPath(featureId);
-        if (path) {
-          navigate(path);
-        }
+        navigate(getFeatureDefaultPath(featureId));
       };
 
       const nextFeatureWithPage = (feature: {
         featureId: Feature;
         pageType: FeaturePageType;
       }) => {
-        const path = getFeatureFullPath(feature.featureId, feature.pageType);
-        navigate(path);
+        navigate(getFeatureFullPath(feature.featureId, feature.pageType));
       };
 
       // #endregion
 
       const contextValue = useMemo(
         () => ({
-          ...FeatureContextValue,
           ...featureConfig,
           redirectElementPage,
           nextFeature,
@@ -101,7 +97,7 @@ const featureLoader =
 
       return (
         <FeatureContext.Provider value={contextValue}>
-          {isSuccess ? <RouteComponent /> : <></>}
+          {isSuccess ? RouteComponent : <></>}
         </FeatureContext.Provider>
       );
     };

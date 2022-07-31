@@ -1,5 +1,4 @@
 import NavRoute from '@app/component/route/nav-route.component';
-import featureLoader from '@app/component/route/feature-loader.hoc';
 import FeatureRoute, {
   IFeatureRouteConfig,
 } from '@app/component/route/feature-route.component';
@@ -36,7 +35,7 @@ const routes: IFeatureRouteConfig[] = [
 ];
 
 const Route = () => {
-  return <FeatureRoute routes={routes} />;
+  return <FeatureRoute routes={routes} featureConfig={featureConfig} />;
 };
 
-export default featureLoader({ ...featureConfig, routeSet: routes })(Route);
+export default Route;

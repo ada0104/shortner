@@ -5,6 +5,8 @@ import {
 } from '@app/enum/feature-page-type.enum';
 import { FeaturePath } from '@app/enum/feature-path.enum';
 import { Route, Routes } from 'react-router-dom';
+import { IFeatureMapItem } from '@app/enum/feature-map.enum';
+import featureLoader from './feature-loader.hoc';
 
 export interface IFeatureRouteConfig {
   path: FeaturePageType | FeatureRouteType | FeaturePath | undefined;
@@ -16,6 +18,7 @@ export interface IFeatureRouteConfig {
 interface IProps {
   routes: IFeatureRouteConfig[];
   endFix?: string;
+  featureConfig?: IFeatureMapItem;
 }
 
 const defaultProps: IProps = {
@@ -26,7 +29,7 @@ const defaultProps: IProps = {
 const FeatureRoute: FC<IProps> = (props) => {
   const { routes, endFix } = props;
 
-  return (
+  const RouteElement = (
     <Routes>
       {routes
         .filter((x) => x.path !== undefined)
@@ -61,6 +64,16 @@ const FeatureRoute: FC<IProps> = (props) => {
         })}
     </Routes>
   );
+
+  if (props.featureConfig) {
+    const LoaderElement = featureLoader({
+      ...props.featureConfig,
+      routeSet: routes,
+    })(RouteElement);
+    return <LoaderElement />;
+  } else {
+    return RouteElement;
+  }
 };
 
 FeatureRoute.defaultProps = defaultProps;

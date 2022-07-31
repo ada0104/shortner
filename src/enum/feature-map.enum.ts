@@ -17,6 +17,15 @@ export interface IFeatureMapItem {
   notLoadResource?: boolean;
 }
 
+export const defaultFeatureMapItem: IFeatureMapItem = {
+  featureId: Feature.UnManaged,
+  featureParentPath: [],
+  featurePath: FeaturePath.Landing,
+  featureRoute: {},
+  featureDefaultRoute: FeaturePageType.Index,
+  notLoadResource: false,
+};
+
 const featureMap: IFeatureMapItem[] = [
   {
     featureId: Feature.Landing,
